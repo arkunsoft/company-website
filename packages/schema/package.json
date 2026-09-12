@@ -1,0 +1,11 @@
+{
+  "name": "@company-site/schema",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "peerDependencies": {
+    "sanity": "^6.13.2"
+  }
+}
