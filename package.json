@@ -1,0 +1,18 @@
+{
+  "name": "company-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.4.1",
+      "onFail": "download"
+    }
+  },
+  "packageManager": "pnpm@12.4.1",
+  "author": {
+    "name": "myrn",
+    "url": "https://github.com/okanbatuk"
+  }
+}
