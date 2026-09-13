@@ -1,4 +1,4 @@
 // apps/studio/schemaTypes/index.ts
-import { client, project } from "@company-site/schema";
+import { client, project, siteSettings } from "@company-site/schema";
 
-export const schemaTypes = [project, client];
+export const schemaTypes = [project, client, siteSettings];
