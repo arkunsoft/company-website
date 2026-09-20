@@ -12,3 +12,4 @@ function getEnvVar(name: string): string {
 export const sanityProjectId = getEnvVar("NEXT_PUBLIC_SANITY_PROJECT_ID");
 export const sanityDataset = getEnvVar("NEXT_PUBLIC_SANITY_DATASET");
 export const sanityApiVersion = getEnvVar("NEXT_PUBLIC_SANITY_API_VERSION");
+export const sanityRevalidateSecret = getEnvVar("SANITY_REVALIDATE_SECRET");
