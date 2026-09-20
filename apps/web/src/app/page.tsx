@@ -2,17 +2,14 @@
 // Temporary test page — confirms the Sanity connection works end to end
 import { client } from "@/lib/sanity/client";
 import { allProjectsQuery } from "@/lib/sanity/queries";
-
-type Project = {
-  title: string;
-  slug: { current: string };
-  summary?: string;
-  industry?: string;
-  priority: number;
-};
+import type { ProjectListItem } from "@/lib/sanity/types";
 
 export default async function Home() {
-  const projects = await client.fetch<Project[]>(allProjectsQuery);
+  const projects = await client.fetch<ProjectListItem[]>(
+    allProjectsQuery,
+    {},
+    { next: { tags: ["project"] } },
+  );
 
   return (
     <div style={{ padding: "2rem" }}>
