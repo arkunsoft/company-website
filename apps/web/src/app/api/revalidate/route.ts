@@ -1,27 +1,43 @@
 // apps/web/src/app/api/revalidate/route.ts
-// Receives webhook calls from Sanity and revalidates the matching cache tag
 import { revalidateTag } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
+import { parseBody } from "next-sanity/webhook";
 import { sanityRevalidateSecret } from "@/lib/sanity/env";
 
-export async function POST(request: NextRequest) {
-  const secret = request.nextUrl.searchParams.get("secret");
+export async function POST(req: NextRequest) {
+  try {
+    const { isValidSignature, body } = await parseBody<{ _type?: string }>(
+      req,
+      sanityRevalidateSecret,
+    );
 
-  if (secret !== sanityRevalidateSecret) {
-    return NextResponse.json({ message: "Invalid secret" }, { status: 401 });
-  }
+    if (!isValidSignature) {
+      return NextResponse.json(
+        { message: "Invalid signature" },
+        { status: 401 },
+      );
+    }
 
-  const body = await request.json();
-  const type = body?._type as string | undefined;
+    if (!body?._type) {
+      return NextResponse.json(
+        { message: "Bad Request: Missing _type" },
+        { status: 400 },
+      );
+    }
 
-  if (!type) {
+    revalidateTag(body._type, { expire: 0 });
+
+    return NextResponse.json({
+      status: 200,
+      revalidated: true,
+      type: body._type,
+      now: Date.now(),
+    });
+  } catch (err) {
+    console.error("Revalidation error:", err);
     return NextResponse.json(
-      { message: "Missing _type in payload" },
-      { status: 400 },
+      { message: "Error revalidating", error: (err as Error).message },
+      { status: 500 },
     );
   }
-
-  revalidateTag(type, { expire: 0 });
-
-  return NextResponse.json({ revalidated: true, type, now: Date.now() });
 }

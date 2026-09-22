@@ -1,7 +1,10 @@
+// apps/studio/sanity.config.ts
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { schemaTypes } from "./schemaTypes";
+
+const SINGLETON_TYPES = new Set(["siteSettings"]);
 
 export default defineConfig({
   name: "default",
@@ -33,5 +36,7 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+    templates: (templates) =>
+      templates.filter(({ schemaType }) => !SINGLETON_TYPES.has(schemaType)),
   },
 });

@@ -4,12 +4,24 @@ packages:
 allowBuilds:
   esbuild: true
 minimumReleaseAgeExclude:
-  - '@sanity/access-ui@6.14.0'
-  - '@sanity/diff@6.14.0'
-  - '@sanity/mutator@6.14.0'
-  - '@sanity/schema@6.14.0'
-  - '@sanity/types@6.14.0'
-  - '@sanity/util@6.14.0'
-  - '@sanity/validation@6.14.0'
-  - '@sanity/vision@6.14.0'
-  - sanity@6.14.0
+  - '@sanity/access-ui@6.14.0 || 6.16.0'
+  - '@sanity/diff@6.14.0 || 6.16.0'
+  - '@sanity/mutator@6.14.0 || 6.16.0'
+  - '@sanity/schema@6.14.0 || 6.16.0'
+  - '@sanity/types@6.14.0 || 6.16.0'
+  - '@sanity/util@6.14.0 || 6.16.0'
+  - '@sanity/validation@6.14.0 || 6.16.0'
+  - '@sanity/vision@6.14.0 || 6.16.0'
+  - sanity@6.14.0 || 6.16.0
+  - '@portabletext/editor@8.1.8'
+  - '@portabletext/plugin-character-pair-decorator@9.0.13'
+  - '@portabletext/plugin-dnd@2.0.14'
+  - '@portabletext/plugin-input-rule@7.0.13'
+  - '@portabletext/plugin-list-index@2.0.12'
+  - '@portabletext/plugin-markdown-shortcuts@9.0.13'
+  - '@portabletext/plugin-one-line@8.0.12'
+  - '@portabletext/plugin-paste-link@5.0.12'
+  - '@portabletext/plugin-table@2.0.12'
+  - '@portabletext/plugin-typography@9.0.13'
+  - '@sanity/ui@4.2.3'
+  - get-it@9.5.5
