@@ -8,8 +8,9 @@ export const ALL_PROJECTS_QUERY = defineQuery(`
     slug,
     industry,
     summary,
-    coverImage,
-    priority
+    "imageUrl": coverImage.asset->url,
+    priority,
+    techStack
   }
 `);
 
@@ -21,15 +22,15 @@ export const PROJECT_BY_SLUG_QUERY = defineQuery(`
     slug,
     industry,
     summary,
-    coverImage,
-    gallery,
+    "imageUrl": coverImage.asset->url,
+    "galleryUrls": gallery[].asset->url,
     caseStudy,
     techStack,
     liveUrl,
     priority,
     client->{
       name,
-      logo,
+      "logoUrl": logo.asset->url,
       url
     }
   }
@@ -40,7 +41,7 @@ export const ALL_CLIENTS_QUERY = defineQuery(`
   *[_type == "client"] | order(order asc) {
     _id,
     name,
-    logo,
+    "logoUrl": logo.asset->url,
     url,
     testimonial,
     personName,
