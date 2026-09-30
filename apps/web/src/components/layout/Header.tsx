@@ -1,8 +1,17 @@
+// apps/web/src/components/layout/Header.tsx
 "use client";
 
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+
+const NAV_LINKS = [
+  { href: "/", label: "Anasayfa" },
+  { href: "#projects", label: "Projeler" },
+  { href: "#references", label: "Referanslar" },
+  { href: "#about", label: "Hakkımızda" },
+];
 
 export function Header() {
   return (
@@ -25,39 +34,31 @@ export function Header() {
 
         {/* NAVIGASYON MENÜSÜ */}
         <nav className="hidden md:flex items-center gap-8">
-          <Link
-            href="/"
-            className="text-sm font-semibold text-slate-700 hover:text-[#0F3866] transition-colors"
-          >
-            Anasayfa
-          </Link>
-          <Link
-            href="#projects"
-            className="text-sm font-semibold text-slate-700 hover:text-[#0F3866] transition-colors"
-          >
-            Projeler
-          </Link>
-          <Link
-            href="#references"
-            className="text-sm font-semibold text-slate-700 hover:text-[#0F3866] transition-colors"
-          >
-            Referanslar
-          </Link>
-          <Link
-            href="#about"
-            className="text-sm font-semibold text-slate-700 hover:text-[#0F3866] transition-colors"
-          >
-            Hakkımızda
-          </Link>
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="group relative text-sm font-semibold text-slate-700 transition-colors hover:text-[#0F3866]"
+            >
+              {link.label}
+              <span
+                className="pointer-events-none absolute -bottom-1 left-1/2 h-[1.5px] w-full origin-center -translate-x-1/2 scale-x-0 bg-[#38A3E5] opacity-0 transition-all duration-300 ease-out group-hover:scale-x-100 group-hover:opacity-100"
+                aria-hidden="true"
+              />
+            </Link>
+          ))}
         </nav>
 
         {/* AKSİYON BUTONU */}
         <div className="flex items-center gap-4">
           <Button
-            size="sm"
-            className="bg-[#0F3866] hover:bg-[#1B75BC] text-white font-semibold shadow-sm px-5"
+            asChild
+            className="group relative inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-linear-to-r from-[#0F3866] to-[#1B75BC] px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-[#0F3866]/20 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-linear-to-r hover:from-[#1B75BC] hover:to-[#38A3E5] hover:shadow-lg hover:shadow-[#1B75BC]/30 active:translate-y-0"
           >
-            İletişime Geç
+            <Link href="#contact">
+              <span>İletişime Geç</span>
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
           </Button>
         </div>
       </div>
