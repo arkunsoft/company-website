@@ -13,7 +13,6 @@ export function ReferenceMarquee({ clients }: ReferenceMarqueeProps) {
     return null;
   }
 
-  // Akıcı döngü için diziyi katlıyoruz
   const duplicatedClients = [...clients, ...clients, ...clients, ...clients];
 
   return (
@@ -43,7 +42,7 @@ export function ReferenceMarquee({ clients }: ReferenceMarqueeProps) {
           {duplicatedClients.map((client, idx) => (
             <div
               key={`${client._id}-${idx}`}
-              className="group relative shrink-0 flex items-center justify-center p-4 w-44 h-24 bg-slate-50 rounded-lg border border-slate-200/80 transition-all duration-300 hover:bg-white hover:shadow-md hover:border-[#38A3E5]/50"
+              className="group relative cursor-pointer shrink-0 flex items-center justify-center p-4 w-44 h-24 bg-slate-50 rounded-lg border border-slate-200/80 transition-all duration-300 hover:bg-white hover:shadow-md hover:border-[#38A3E5]/50"
             >
               <div className="relative h-12 w-32 flex items-center justify-center filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300">
                 {client.logoUrl ? (

@@ -1,12 +1,22 @@
+import Link from "next/link";
+import { ContactSection } from "@/components/home/ContactSection";
 import { HeroBackground } from "@/components/home/HeroBackground";
 import { ProjectsCarousel } from "@/components/home/ProjectsCarousel";
 import { ReferenceMarquee } from "@/components/home/ReferenceMarquee";
+import { ServicesSection } from "@/components/home/ServicesSection";
+import { StatsSection } from "@/components/home/StatsSection";
+import { TechStackSection } from "@/components/home/TechStackSection";
 import { Button } from "@/components/ui/button";
 import { sanityFetch } from "@/lib/sanity/fetch";
-import { ALL_CLIENTS_QUERY, ALL_PROJECTS_QUERY } from "@/lib/sanity/queries";
+import {
+  ALL_CLIENTS_QUERY,
+  ALL_PROJECTS_QUERY,
+  SITE_SETTINGS_QUERY,
+} from "@/lib/sanity/queries";
 import type {
   ALL_CLIENTS_QUERY_RESULT,
   ALL_PROJECTS_QUERY_RESULT,
+  SITE_SETTINGS_QUERY_RESULT,
 } from "@/lib/sanity/sanity.types";
 
 export default async function HomePage() {
@@ -14,6 +24,9 @@ export default async function HomePage() {
     sanityFetch<ALL_PROJECTS_QUERY_RESULT>({ query: ALL_PROJECTS_QUERY }),
     sanityFetch<ALL_CLIENTS_QUERY_RESULT>({ query: ALL_CLIENTS_QUERY }),
   ]);
+  const settings = await sanityFetch<SITE_SETTINGS_QUERY_RESULT>({
+    query: SITE_SETTINGS_QUERY,
+  });
 
   return (
     <>
@@ -36,26 +49,38 @@ export default async function HomePage() {
           <div className="mt-10 flex items-center justify-center gap-4">
             <Button
               size="lg"
-              className="bg-white text-[#0F3866] hover:bg-white/90 px-8 h-12 shadow-lg font-semibold"
+              asChild
+              className="bg-white text-[#0F3866] hover:bg-white/90 px-8 h-12 shadow-lg font-semibold cursor-pointer"
             >
-              Projeleri İncele
+              <Link href="#projects">Projeleri İncele</Link>
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="border-white/30 text-white hover:bg-white/10 h-12 px-8"
+              asChild
+              className="border-white/30 text-white hover:bg-white/10 h-12 px-8 cursor-pointer"
             >
-              Hakkımızda
+              <Link href="#about">Hakkımızda</Link>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* PROJELER CAROUSEL */}
-      <ProjectsCarousel projects={projects} />
-
-      {/* REFERANSLAR MARQUEE BANDI */}
       <ReferenceMarquee clients={clients} />
+
+      <StatsSection />
+
+      <ServicesSection />
+
+      <section id="projects" className="scroll-mt-20 bg-slate-50 py-12">
+        <ProjectsCarousel projects={projects} />
+      </section>
+
+      <TechStackSection />
+
+      <section id="contact" className="scroll-mt-20">
+        <ContactSection settings={settings} />
+      </section>
     </>
   );
 }

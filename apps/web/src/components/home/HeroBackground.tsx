@@ -17,7 +17,7 @@ const CONNECTION_DISTANCE = 150;
 const MOUSE_RADIUS = 160;
 const MOUSE_FORCE = 0.06;
 const RETURN_FORCE = 0.02;
-const GRID_CELL_SIZE = CONNECTION_DISTANCE; // Spatial partitioning bucket size
+const GRID_CELL_SIZE = CONNECTION_DISTANCE;
 
 export function HeroBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -66,8 +66,6 @@ export function HeroBackground() {
       mouse.y = -9999;
     }
 
-    // Buckets nodes into a spatial grid so we only compare nearby pairs,
-    // avoiding an O(n^2) scan across all nodes every frame
     function buildGrid(): Map<string, Node[]> {
       const grid = new Map<string, Node[]>();
       for (const node of nodes) {
@@ -109,7 +107,6 @@ export function HeroBackground() {
 
       const grid = buildGrid();
 
-      // Only check connections within the node's own cell and its 8 neighbors
       for (const node of nodes) {
         const cellX = Math.floor(node.x / GRID_CELL_SIZE);
         const cellY = Math.floor(node.y / GRID_CELL_SIZE);

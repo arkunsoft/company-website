@@ -1,12 +1,13 @@
 "use client";
 
-import { ExternalLink } from "lucide-react";
+import { ArrowUpRight, Sparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useCallback, useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
+  type CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -21,9 +22,33 @@ interface ProjectsCarouselProps {
 }
 
 export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
+  const [api, setApi] = useState<CarouselApi>();
+  const [progress, setProgress] = useState(0);
+
+  const onScroll = useCallback((api: CarouselApi) => {
+    if (!api) return;
+    const currentProgress = Math.max(0, Math.min(1, api.scrollProgress()));
+    setProgress(currentProgress * 100);
+  }, []);
+
+  useEffect(() => {
+    if (!api) return;
+
+    onScroll(api);
+    api.on("select", onScroll);
+    api.on("scroll", onScroll);
+    api.on("reInit", onScroll);
+
+    return () => {
+      api.off("select", onScroll);
+      api.off("scroll", onScroll);
+      api.off("reInit", onScroll);
+    };
+  }, [api, onScroll]);
+
   if (!projects || projects.length === 0) {
     return (
-      <div className="text-center py-12 text-slate-500">
+      <div className="text-center py-16 text-slate-400 font-medium bg-slate-50/50 rounded-3xl border border-dashed border-slate-200">
         Henüz sergilenecek bir proje bulunmuyor.
       </div>
     );
@@ -32,108 +57,137 @@ export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
   return (
     <section
       id="projects"
-      className="py-20 bg-slate-50 border-y border-slate-200/80"
+      className="relative py-24 bg-[#F8FAFC] overflow-hidden"
     >
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
-          <div>
-            <h2 className="text-xs font-bold uppercase tracking-widest text-[#38A3E5]">
-              Portfolyo
-            </h2>
-            <p className="text-3xl font-extrabold text-[#0F3866] mt-2 tracking-tight">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none">
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#38A3E5]/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#0F3866]/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="relative container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-8 border-b border-slate-200/80">
+          <div className="max-w-xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#38A3E5]/10 border border-[#38A3E5]/20 text-[#38A3E5] text-xs font-bold uppercase tracking-wider mb-3">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Portfolyo</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-black text-[#0F3866] tracking-tight leading-tight">
               Öne Çıkan Projelerimiz
+            </h2>
+          </div>
+
+          <div className="max-w-md md:text-right">
+            <p className="text-base text-slate-600 font-medium leading-relaxed">
+              Müşterilerimiz için geliştirdiğimiz{" "}
+              <span className="text-[#0F3866] font-semibold">
+                modern, ölçeklenebilir
+              </span>{" "}
+              ve yüksek performanslı dijital çözümler.
             </p>
           </div>
-          <p className="text-slate-600 max-w-md mt-4 md:mt-0 text-sm">
-            Müşterilerimiz için geliştirdiğimiz modern, ölçeklenebilir ve yüksek
-            performanslı dijital çözümler.
-          </p>
         </div>
 
         <Carousel
+          setApi={setApi}
           opts={{
             align: "start",
-            loop: true,
+            loop: false,
           }}
           className="w-full relative"
         >
-          <CarouselContent className="-ml-4">
+          <CarouselContent className="-ml-6 py-6">
             {projects.map((project: ProjectItem) => (
               <CarouselItem
                 key={project._id}
-                className="pl-4 md:basis-1/2 lg:basis-1/3"
+                className="pl-6 md:basis-1/2 lg:basis-1/3"
               >
-                <Card className="h-full bg-white border border-slate-200 hover:border-[#38A3E5] transition-all duration-300 hover:shadow-xl overflow-hidden group flex flex-col justify-between">
-                  <CardContent className="p-0 flex flex-col h-full">
-                    {/* Proje Görseli */}
-                    <div className="relative h-48 w-full bg-slate-100 overflow-hidden border-b border-slate-100">
-                      {project.imageUrl ? (
-                        <Image
-                          src={project.imageUrl}
-                          alt={project.title || "Proje Görseli"}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                      ) : (
-                        <div className="flex items-center justify-center h-full bg-slate-100 text-slate-400 font-medium">
-                          Görsel Yok
+                <div className="relative h-full bg-white rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-xl hover:border-[#38A3E5]/40 transition-all duration-300 group flex flex-col justify-between overflow-hidden cursor-pointer select-none">
+                  {project.slug?.current && (
+                    <Link
+                      href={`/projects/${project.slug.current}`}
+                      className="absolute inset-0 z-20"
+                      aria-label={project.title || "Proje Detayı"}
+                    />
+                  )}
+
+                  <div className="relative h-56 w-full bg-slate-100 overflow-hidden select-none">
+                    {project.imageUrl ? (
+                      <Image
+                        src={project.imageUrl}
+                        alt={project.title || "Proje Görseli"}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500 ease-out pointer-events-none select-none"
+                      />
+                    ) : (
+                      <div className="flex items-center justify-center h-full bg-linear-to-br from-slate-100 to-slate-200 text-slate-400 font-medium text-sm select-none">
+                        Görsel Bulunmuyor
+                      </div>
+                    )}
+
+                    <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+                    {project.industry && (
+                      <div className="absolute top-4 left-4 z-10 pointer-events-none">
+                        <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-white/95 backdrop-blur-md text-[#0F3866] shadow-sm border border-slate-200/50 cursor-pointer select-none">
+                          {project.industry}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="p-6 flex flex-col flex-1 justify-between bg-white cursor-pointer select-none">
+                    <div>
+                      <h3 className="text-xl font-bold text-[#0F3866] group-hover:text-[#38A3E5] transition-colors leading-snug line-clamp-1 cursor-pointer select-none">
+                        {project.title}
+                      </h3>
+                      <p className="text-sm text-slate-500 mt-2 line-clamp-2 leading-relaxed cursor-pointer select-none">
+                        {project.summary || "Proje açıklaması bulunmuyor."}
+                      </p>
+                    </div>
+
+                    <div className="mt-6 pt-4 border-t border-slate-100 flex flex-col gap-4">
+                      {project.techStack && project.techStack.length > 0 && (
+                        <div className="flex flex-wrap gap-1.5">
+                          {project.techStack.map((tech) => (
+                            <Badge
+                              key={`${project._id}-${tech}`}
+                              variant="secondary"
+                              className="text-[11px] font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 border-0 px-2 py-0.5 cursor-pointer select-none"
+                            >
+                              {tech}
+                            </Badge>
+                          ))}
                         </div>
                       )}
-                    </div>
 
-                    {/* Proje Detayları */}
-                    <div className="p-6 flex flex-col flex-1 justify-between bg-white">
-                      <div>
-                        {project.industry && (
-                          <span className="text-xs font-bold text-[#38A3E5] block mb-1">
-                            {project.industry}
-                          </span>
-                        )}
-                        <h3 className="text-xl font-bold text-[#0F3866] group-hover:text-[#38A3E5] transition-colors">
-                          {project.title}
-                        </h3>
-                        <p className="text-sm text-slate-600 mt-2 line-clamp-3">
-                          {project.summary || "Proje açıklaması bulunmuyor."}
-                        </p>
-                      </div>
-
-                      <div className="mt-6 pt-4 border-t border-slate-100 flex flex-col gap-4">
-                        {/* Teknolojiler */}
-                        {project.techStack && project.techStack.length > 0 && (
-                          <div className="flex flex-wrap gap-1.5">
-                            {project.techStack.map((tech) => (
-                              <Badge
-                                key={`${project._id}-${tech}`}
-                                variant="secondary"
-                                className="text-[11px] font-medium bg-slate-100 text-slate-700 hover:bg-slate-200"
-                              >
-                                {tech}
-                              </Badge>
-                            ))}
-                          </div>
-                        )}
-
-                        {/* Detay Linki */}
-                        {project.slug?.current && (
-                          <Link
-                            href={`/projects/${project.slug.current}`}
-                            className="inline-flex items-center gap-1 text-sm font-bold text-[#0F3866] hover:text-[#38A3E5] transition-colors mt-auto"
-                          >
-                            İncele <ExternalLink className="w-3.5 h-3.5 ml-1" />
-                          </Link>
-                        )}
+                      <div className="inline-flex items-center justify-between text-sm font-bold text-[#0F3866] group-hover:text-[#38A3E5] transition-colors pt-1 cursor-pointer select-none">
+                        <span className="cursor-pointer select-none">
+                          Detayları İncele
+                        </span>
+                        <div className="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-[#38A3E5] group-hover:text-white flex items-center justify-center transition-all duration-300">
+                          <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        </div>
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               </CarouselItem>
             ))}
           </CarouselContent>
 
-          {/* Navigasyon Okları */}
-          <div className="hidden sm:flex justify-end gap-2 mt-8">
-            <CarouselPrevious className="static translate-y-0 bg-white border-slate-300 text-[#0F3866] hover:bg-[#0F3866] hover:text-white" />
-            <CarouselNext className="static translate-y-0 bg-white border-slate-300 text-[#0F3866] hover:bg-[#0F3866] hover:text-white" />
+          <div className="flex items-center justify-between mt-10">
+            <div className="h-1.5 flex-1 bg-slate-200/80 rounded-full max-w-xs overflow-hidden hidden sm:block">
+              <div
+                className="h-full bg-[#38A3E5] rounded-full transition-all duration-300 ease-out"
+                style={{ width: `${Math.max(10, progress)}%` }}
+              />
+            </div>
+
+            <div className="flex items-center gap-3 ml-auto">
+              <CarouselPrevious className="static translate-y-0 w-11 h-11 rounded-xl bg-white border border-slate-200 text-[#0F3866] hover:bg-[#0F3866] hover:text-white hover:border-[#0F3866] shadow-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed" />
+              <CarouselNext className="static translate-y-0 w-11 h-11 rounded-xl bg-white border border-slate-200 text-[#0F3866] hover:bg-[#0F3866] hover:text-white hover:border-[#0F3866] shadow-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed" />
+            </div>
           </div>
         </Carousel>
       </div>
