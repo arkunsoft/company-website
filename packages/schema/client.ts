@@ -1,5 +1,4 @@
 // packages/schema/reference.ts
-// Content model for a client/reference logo entry
 import { defineField, defineType } from "sanity";
 
 export const client = defineType({
@@ -24,6 +23,25 @@ export const client = defineType({
       name: "url",
       title: "Client Website",
       type: "url",
+    }),
+    defineField({
+      name: "testimonial",
+      title: "Testimonial",
+      description: "What this client said about working with us",
+      type: "text",
+      rows: 4,
+    }),
+    defineField({
+      name: "personName",
+      title: "Person Name",
+      description: 'Who gave the testimonial, e.g. "Ahmet Yılmaz"',
+      type: "string",
+    }),
+    defineField({
+      name: "personRole",
+      title: "Person Role",
+      description: 'Their title at the client company, e.g. "Genel Müdür"',
+      type: "string",
     }),
     defineField({
       name: "order",
