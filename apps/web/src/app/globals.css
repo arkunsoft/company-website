@@ -15,3 +15,17 @@
     --border: 214.3 31.8% 91.4%;
   }
 }
+
+@keyframes pulse-slow {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}

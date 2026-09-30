@@ -1,3 +1,4 @@
+import { HeroBackground } from "@/components/home/HeroBackground";
 import { ProjectsCarousel } from "@/components/home/ProjectsCarousel";
 import { ReferenceMarquee } from "@/components/home/ReferenceMarquee";
 import { Button } from "@/components/ui/button";
@@ -16,32 +17,33 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="relative py-24 md:py-32 overflow-hidden bg-linear-to-b from-slate-50 to-background border-b border-border/40">
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <span className="inline-block py-1 px-3 rounded-full text-xs font-semibold bg-[#38A3E5]/10 text-[#0F3866] border border-[#38A3E5]/20 mb-6">
+      <section className="relative py-24 md:py-32 overflow-hidden border-b border-border/40">
+        <HeroBackground />
+        <div className="mx-auto w-full max-w-sm sm:w-fit sm:max-w-[90vw] px-6 text-center relative z-10">
+          <span className="inline-block py-1 px-3 rounded-full text-xs font-semibold bg-white/10 text-white border border-white/20 backdrop-blur-sm mb-6">
             ArkunSoft Teknoloji & Yazılım
           </span>
-          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-[#0F3866] max-w-4xl mx-auto leading-tight">
+          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
             Geleceğin Dijital Sistemlerini <br className="hidden sm:inline" />
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-[#0F3866] via-[#1B75BC] to-[#38A3E5]">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-[#38A3E5] via-[#5FB8EE] to-white">
               Bugünden Mimarlıyoruz
             </span>
           </h1>
-          <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto font-normal">
+          <p className="mt-6 text-lg sm:text-xl text-white/70 max-w-2xl mx-auto font-normal">
             Yüksek performanslı, güvenli ve modern web platformları ile kurumsal
             süreçlerinizi uçtan uca dijitalleştiriyoruz.
           </p>
           <div className="mt-10 flex items-center justify-center gap-4">
             <Button
               size="lg"
-              className="bg-[#0F3866] hover:bg-[#1B75BC] text-white px-8 h-12 shadow-md"
+              className="bg-white text-[#0F3866] hover:bg-white/90 px-8 h-12 shadow-lg font-semibold"
             >
               Projeleri İncele
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="border-border/80 h-12 px-8"
+              className="border-white/30 text-white hover:bg-white/10 h-12 px-8"
             >
               Hakkımızda
             </Button>
