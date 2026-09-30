@@ -1,12 +1,19 @@
+// apps/web/src/components/layout/Footer.tsx
 import Image from "next/image";
 import Link from "next/link";
+import { sanityFetch } from "@/lib/sanity/fetch";
+import { SITE_SETTINGS_QUERY } from "@/lib/sanity/queries";
+import type { SITE_SETTINGS_QUERY_RESULT } from "@/lib/sanity/sanity.types";
 
-export function Footer() {
+export async function Footer() {
+  const settings = await sanityFetch<SITE_SETTINGS_QUERY_RESULT>({
+    query: SITE_SETTINGS_QUERY,
+  });
+
   return (
-    <footer className="bg-[#0F3866] text-white py-12 border-t border-slate-800">
+    <footer className="bg-[#0F3866] text-white pt-12 pb-4 border-t border-slate-800">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* MARKA BİLGİSİ */}
           <div className="md:col-span-1">
             <Link href="/" className="inline-block mb-4">
               <Image
@@ -22,7 +29,6 @@ export function Footer() {
             </p>
           </div>
 
-          {/* MENÜ LINKLERI */}
           <div>
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#38A3E5] mb-4">
               Menü
@@ -52,18 +58,35 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* İLETİŞİM */}
           <div>
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#38A3E5] mb-4">
               İletişim
             </h4>
             <ul className="space-y-2 text-sm text-slate-300">
-              <li>Ankara, Türkiye</li>
-              <li>info@arkunsoft.com</li>
+              {settings?.address && <li>{settings.address}</li>}
+              {settings?.contactEmail && (
+                <li>
+                  <a
+                    href={`mailto:${settings.contactEmail}`}
+                    className="hover:text-white transition-colors"
+                  >
+                    {settings.contactEmail}
+                  </a>
+                </li>
+              )}
+              {settings?.phone && (
+                <li>
+                  <a
+                    href={`tel:${settings.phone}`}
+                    className="hover:text-white transition-colors"
+                  >
+                    {settings.phone}
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
 
-          {/* YASAL */}
           <div>
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#38A3E5] mb-4">
               Yasal
@@ -83,7 +106,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-slate-800 text-center text-xs text-slate-400">
+        <div className="pt-4 pb-0 border-t border-slate-800 text-center text-xs text-slate-400">
           © {new Date().getFullYear()} ArkunSoft. Tüm hakları saklıdır.
         </div>
       </div>
