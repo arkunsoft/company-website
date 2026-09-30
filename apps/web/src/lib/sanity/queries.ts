@@ -27,12 +27,7 @@ export const PROJECT_BY_SLUG_QUERY = defineQuery(`
     caseStudy,
     techStack,
     liveUrl,
-    priority,
-    client->{
-      name,
-      "logoUrl": logo.asset->url,
-      url
-    }
+    priority
   }
 `);
 

@@ -53,6 +53,9 @@ export type Client = {
     _type: "image";
   };
   url?: string;
+  testimonial?: string;
+  personName?: string;
+  personRole?: string;
   order?: number;
 };
 
@@ -256,7 +259,7 @@ export type ALL_PROJECTS_QUERY_RESULT = Array<{
 
 // Source: src/lib/sanity/queries.ts
 // Variable: PROJECT_BY_SLUG_QUERY
-// Query: *[_type == "project" && slug.current == $slug][0] {    _id,    title,    slug,    industry,    summary,    "imageUrl": coverImage.asset->url,    "galleryUrls": gallery[].asset->url,    caseStudy,    techStack,    liveUrl,    priority,    client->{      name,      "logoUrl": logo.asset->url,      url    }  }
+// Query: *[_type == "project" && slug.current == $slug][0] {    _id,    title,    slug,    industry,    summary,    "imageUrl": coverImage.asset->url,    "galleryUrls": gallery[].asset->url,    caseStudy,    techStack,    liveUrl,    priority  }
 export type PROJECT_BY_SLUG_QUERY_RESULT = {
   _id: string;
   title: string | null;
@@ -286,7 +289,6 @@ export type PROJECT_BY_SLUG_QUERY_RESULT = {
   techStack: Array<string> | null;
   liveUrl: string | null;
   priority: 1 | 2 | 3 | 4 | 5 | null;
-  client: null;
 } | null;
 
 // Source: src/lib/sanity/queries.ts
@@ -297,9 +299,9 @@ export type ALL_CLIENTS_QUERY_RESULT = Array<{
   name: string | null;
   logoUrl: string | null;
   url: string | null;
-  testimonial: null;
-  personName: null;
-  personRole: null;
+  testimonial: string | null;
+  personName: string | null;
+  personRole: string | null;
 }>;
 
 // Source: src/lib/sanity/queries.ts
@@ -320,7 +322,7 @@ export type SITE_SETTINGS_QUERY_RESULT = {
 declare global {
   interface SanityQueries {
     '\n  *[_type == "project"] | order(priority desc, title asc) {\n    _id,\n    title,\n    slug,\n    industry,\n    summary,\n    "imageUrl": coverImage.asset->url,\n    priority,\n    techStack\n  }\n': ALL_PROJECTS_QUERY_RESULT;
-    '\n  *[_type == "project" && slug.current == $slug][0] {\n    _id,\n    title,\n    slug,\n    industry,\n    summary,\n    "imageUrl": coverImage.asset->url,\n    "galleryUrls": gallery[].asset->url,\n    caseStudy,\n    techStack,\n    liveUrl,\n    priority,\n    client->{\n      name,\n      "logoUrl": logo.asset->url,\n      url\n    }\n  }\n': PROJECT_BY_SLUG_QUERY_RESULT;
+    '\n  *[_type == "project" && slug.current == $slug][0] {\n    _id,\n    title,\n    slug,\n    industry,\n    summary,\n    "imageUrl": coverImage.asset->url,\n    "galleryUrls": gallery[].asset->url,\n    caseStudy,\n    techStack,\n    liveUrl,\n    priority\n  }\n': PROJECT_BY_SLUG_QUERY_RESULT;
     '\n  *[_type == "client"] | order(order asc) {\n    _id,\n    name,\n    "logoUrl": logo.asset->url,\n    url,\n    testimonial,\n    personName,\n    personRole\n  }\n': ALL_CLIENTS_QUERY_RESULT;
     '\n  *[_type == "siteSettings"][0] {\n    contactEmail,\n    phone,\n    address,\n    socialLinks\n  }\n': SITE_SETTINGS_QUERY_RESULT;
   }
