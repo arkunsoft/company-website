@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { Mail, MapPin, MessageSquare, Phone, Send } from "lucide-react";
 import type { SITE_SETTINGS_QUERY_RESULT } from "@/lib/sanity/sanity.types";
 
 interface ContactSectionProps {
@@ -29,9 +29,10 @@ export function ContactSection({ settings }: ContactSectionProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           <div className="lg:col-span-5 flex flex-col justify-between h-full select-none">
             <div>
-              <span className="inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-[#38A3E5] bg-[#38A3E5]/10 border border-[#38A3E5]/20">
-                İletişim
-              </span>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-[#38A3E5] bg-[#38A3E5]/10 border border-[#38A3E5]/20">
+                <MessageSquare className="w-4 h-4 text-[#38A3E5]" />
+                <span>İLETİŞİM</span>
+              </div>
               <h3 className="text-3xl sm:text-4xl font-extrabold text-[#0F3866] mt-3 tracking-tight leading-tight">
                 Projenizi Birlikte Hayata Geçirelim
               </h3>

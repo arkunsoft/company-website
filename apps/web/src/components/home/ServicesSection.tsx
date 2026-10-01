@@ -1,4 +1,4 @@
-import { Bot, Code2, Cpu, Smartphone } from "lucide-react";
+import { Bot, Code2, Cpu, Layers, Smartphone } from "lucide-react";
 
 const SERVICES = [
   {
@@ -38,8 +38,9 @@ export function ServicesSection() {
 
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#38A3E5]/10 border border-[#38A3E5]/20 text-[#38A3E5] text-xs font-bold uppercase tracking-wider mb-3">
-            <span>Çözümlerimiz</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#38A3E5]/10 border border-[#38A3E5]/20 text-[#38A3E5] text-xs font-bold uppercase tracking-wider mb-3">
+            <Layers className="w-4 h-4 text-[#38A3E5]" />
+            <span>ÇÖZÜMLERİMİZ</span>
           </div>
           <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl leading-snug">
             Geleceğin Teknolojileriyle Uçtan Uca Yazılım

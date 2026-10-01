@@ -45,7 +45,7 @@ export default async function HomePage() {
             <span className="block whitespace-nowrap">
               Geleceğin Dijital Sistemlerini
             </span>
-            <span className="block mt-1 pb-3 py-1 font-(family-name:--font-playfair) italic font-normal text-4xl sm:text-6xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-[#00F2FE] via-[#4FACFE] to-white">
+            <span className="block mt-1 pb-3 py-1 font-(family-name:--font-playfair) italic font-normal text-4xl sm:text-6xl md:text-7xl text-transparent bg-clip-text bg-linear-to-r from-[#00F2FE] via-[#4FACFE] to-white">
               Bugünden Mimarlıyoruz
             </span>
           </h1>

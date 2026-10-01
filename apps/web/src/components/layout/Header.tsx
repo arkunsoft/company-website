@@ -1,64 +1,69 @@
-// apps/web/src/components/layout/Header.tsx
 "use client";
 
-import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
-const NAV_LINKS = [
-  { href: "/", label: "Anasayfa" },
-  { href: "#projects", label: "Projeler" },
-  { href: "#references", label: "Referanslar" },
-  { href: "#about", label: "Hakkımızda" },
+const NAV_ITEMS = [
+  { name: "Hizmetler", href: "#services" },
+  { name: "Projeler", href: "#projects" },
+  { name: "Teknolojiler", href: "#tech-stack" },
 ];
 
 export function Header() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/80 backdrop-blur-md">
-      <div className="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link
-          href="/"
-          className="flex items-center transition-opacity hover:opacity-90"
-        >
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4 transition-all duration-300 select-none">
+      <nav
+        className={`w-full max-w-7xl flex items-center justify-between px-6 py-3 rounded-2xl transition-all duration-300 border ${
+          scrolled
+            ? "bg-[#0F3866]/85 backdrop-blur-md border-white/15 shadow-xl shadow-black/20"
+            : "bg-[#0F3866]/40 backdrop-blur-sm border-white/10"
+        }`}
+      >
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2 shrink-0">
           <Image
             src="/arkunsoft.png"
             alt="ArkunSoft Logo"
             width={140}
             height={36}
-            priority
-            className="h-9 w-auto object-contain"
+            className="h-8 w-auto object-contain brightness-0 invert"
           />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="group relative text-sm font-semibold text-slate-700 transition-colors hover:text-[#0F3866]"
-            >
-              {link.label}
-              <span
-                className="pointer-events-none absolute -bottom-1 left-1/2 h-[1.5px] w-full origin-center -translate-x-1/2 scale-x-0 bg-[#38A3E5] opacity-0 transition-all duration-300 ease-out group-hover:scale-x-100 group-hover:opacity-100"
-                aria-hidden="true"
-              />
-            </Link>
+        {/* Nav Items */}
+        <ul className="hidden md:flex items-center gap-2">
+          {NAV_ITEMS.map((item) => (
+            <li key={item.name}>
+              <Link
+                href={item.href}
+                className="px-4 py-2 text-xs font-semibold text-slate-100 rounded-xl border border-transparent hover:border-[#38A3E5]/40 hover:bg-[#38A3E5]/15 hover:text-white transition-all duration-200 hover:shadow-sm hover:shadow-[#38A3E5]/20 block"
+              >
+                {item.name}
+              </Link>
+            </li>
           ))}
-        </nav>
+        </ul>
 
-        <div className="flex items-center gap-4">
-          <Button
-            asChild
-            className="group relative inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-linear-to-r from-[#0F3866] to-[#1B75BC] px-5 py-2.5 text-sm font-semibold text-white shadow-md shadow-[#0F3866]/20 transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-linear-to-r hover:from-[#1B75BC] hover:to-[#38A3E5] hover:shadow-lg hover:shadow-[#1B75BC]/30 active:translate-y-0"
-          >
-            <Link href="#contact">
-              <span>İletişime Geç</span>
-              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-          </Button>
-        </div>
-      </div>
+        {/* Call to Action Button */}
+        <Link
+          href="#contact"
+          className="px-5 py-2 text-xs font-bold rounded-xl bg-[#38A3E5] text-white hover:bg-[#38A3E5]/90 transition-all shadow-md shadow-[#38A3E5]/25 hover:scale-105 active:scale-95"
+        >
+          İletişime Geç
+        </Link>
+      </nav>
     </header>
   );
 }
