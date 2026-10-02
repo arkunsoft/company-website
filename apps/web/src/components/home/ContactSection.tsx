@@ -33,8 +33,8 @@ export function ContactSection({ settings }: ContactSectionProps) {
                 <MessageSquare className="w-4 h-4 text-[#38A3E5]" />
                 <span>İLETİŞİM</span>
               </div>
-              <h3 className="text-3xl sm:text-4xl font-extrabold text-[#0F3866] mt-3 tracking-tight leading-tight">
-                Projenizi Birlikte Hayata Geçirelim
+              <h3 className="text-3xl sm:text-4xl font-(family-name:--font-playfair) italic font-extrabold text-[#0F3866] mt-3 tracking-tight leading-tight">
+                Projenizi Birlikte Hayata Geçirelim..
               </h3>
               <p className="text-slate-600 mt-4 text-sm sm:text-base leading-relaxed">
                 Dijital dönüşümünüzü başlatmak veya var olan sistemlerinizi
@@ -87,7 +87,7 @@ export function ContactSection({ settings }: ContactSectionProps) {
                     </div>
                     <div>
                       <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                        Lokasyon / Adres
+                        Adres
                       </p>
                       <p className="text-sm sm:text-base font-bold text-[#0F3866] mt-0.5 whitespace-pre-line leading-snug">
                         {address}
