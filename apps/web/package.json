@@ -12,6 +12,7 @@
     "format": "biome format --write"
   },
   "dependencies": {
+    "@portabletext/react": "^8.0.1",
     "@sanity/client": "^8.6.2",
     "@sanity/image-url": "^2.1.1",
     "class-variance-authority": "^0.7.1",
@@ -39,6 +40,5 @@
     "sanity": "^6.15.0",
     "tailwindcss": "^4",
     "typescript": "^5"
-  },
-  "packageManager": "pnpm@12.4.1"
+  }
 }

@@ -13,6 +13,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { urlFor } from "@/lib/sanity/image";
 import type { ALL_PROJECTS_QUERY_RESULT } from "@/lib/sanity/sanity.types";
 
 export type ProjectItem = ALL_PROJECTS_QUERY_RESULT[number];
@@ -24,11 +25,16 @@ interface ProjectsCarouselProps {
 export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
   const [api, setApi] = useState<CarouselApi>();
   const [progress, setProgress] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
   const onScroll = useCallback((api: CarouselApi) => {
     if (!api) return;
     const currentProgress = Math.max(0, Math.min(1, api.scrollProgress()));
     setProgress(currentProgress * 100);
+  }, []);
+
+  useEffect(() => {
+    setMounted(true);
   }, []);
 
   useEffect(() => {
@@ -57,7 +63,7 @@ export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
   return (
     <section
       id="projects"
-      className="relative py-24 bg-[#F8FAFC] overflow-hidden"
+      className="relative py-12 bg-[#F8FAFC] overflow-hidden"
     >
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none">
         <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#38A3E5]/10 rounded-full blur-3xl" />
@@ -102,18 +108,22 @@ export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
                 className="pl-6 md:basis-1/2 lg:basis-1/3"
               >
                 <div className="relative h-full bg-white rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-xl hover:border-[#38A3E5]/40 transition-all duration-300 group flex flex-col justify-between overflow-hidden cursor-pointer select-none">
-                  {project.slug?.current && (
+                  {project.slug && (
                     <Link
-                      href={`/projects/${project.slug.current}`}
+                      href={`/projects/${project.slug}`}
                       className="absolute inset-0 z-20"
                       aria-label={project.title || "Proje Detayı"}
                     />
                   )}
 
                   <div className="relative h-56 w-full bg-slate-100 overflow-hidden select-none">
-                    {project.imageUrl ? (
+                    {project.coverImage ? (
                       <Image
-                        src={project.imageUrl}
+                        src={urlFor(project.coverImage)
+                          .width(800)
+                          .height(500)
+                          .quality(90)
+                          .url()}
                         alt={project.title || "Proje Görseli"}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -185,8 +195,12 @@ export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
             </div>
 
             <div className="flex items-center gap-3 ml-auto">
-              <CarouselPrevious className="static translate-y-0 w-11 h-11 rounded-xl bg-white border border-slate-200 text-[#0F3866] hover:bg-[#0F3866] hover:text-white hover:border-[#0F3866] shadow-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed" />
-              <CarouselNext className="static translate-y-0 w-11 h-11 rounded-xl bg-white border border-slate-200 text-[#0F3866] hover:bg-[#0F3866] hover:text-white hover:border-[#0F3866] shadow-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed" />
+              {mounted && (
+                <>
+                  <CarouselPrevious className="static translate-y-0 w-11 h-11 rounded-xl bg-white border border-slate-200 text-[#0F3866] hover:bg-[#0F3866] hover:text-white hover:border-[#0F3866] shadow-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed" />
+                  <CarouselNext className="static translate-y-0 w-11 h-11 rounded-xl bg-white border border-slate-200 text-[#0F3866] hover:bg-[#0F3866] hover:text-white hover:border-[#0F3866] shadow-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed" />
+                </>
+              )}
             </div>
           </div>
         </Carousel>
