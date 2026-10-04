@@ -5,12 +5,13 @@ export const ALL_PROJECTS_QUERY = defineQuery(`
   *[_type == "project"] | order(priority desc, title asc) {
     _id,
     title,
-    slug,
+    "slug": slug.current,
     industry,
     summary,
-    "imageUrl": coverImage.asset->url,
+    coverImage,
     priority,
-    techStack
+    techStack,
+    liveUrl
   }
 `);
 
@@ -19,16 +20,21 @@ export const PROJECT_BY_SLUG_QUERY = defineQuery(`
   *[_type == "project" && slug.current == $slug][0] {
     _id,
     title,
-    slug,
+    "slug": slug.current,
     industry,
     summary,
-    "imageUrl": coverImage.asset->url,
-    "galleryUrls": gallery[].asset->url,
+    coverImage,
+    gallery,
     caseStudy,
     techStack,
     liveUrl,
     priority
   }
+`);
+
+// Project Slugs Query (for generateStaticParams in App Router)
+export const PROJECT_SLUGS_QUERY = defineQuery(`
+  *[_type == "project" && defined(slug.current)][].slug.current
 `);
 
 // Clients / References Query

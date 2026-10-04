@@ -245,29 +245,49 @@ export type AllSanitySchemaTypes =
 
 // Source: src/lib/sanity/queries.ts
 // Variable: ALL_PROJECTS_QUERY
-// Query: *[_type == "project"] | order(priority desc, title asc) {    _id,    title,    slug,    industry,    summary,    "imageUrl": coverImage.asset->url,    priority,    techStack  }
+// Query: *[_type == "project"] | order(priority desc, title asc) {    _id,    title,    "slug": slug.current,    industry,    summary,    coverImage,    priority,    techStack,    liveUrl  }
 export type ALL_PROJECTS_QUERY_RESULT = Array<{
   _id: string;
   title: string | null;
-  slug: Slug | null;
+  slug: string | null;
   industry: string | null;
   summary: string | null;
-  imageUrl: string | null;
+  coverImage: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
   priority: 1 | 2 | 3 | 4 | 5 | null;
   techStack: Array<string> | null;
+  liveUrl: string | null;
 }>;
 
 // Source: src/lib/sanity/queries.ts
 // Variable: PROJECT_BY_SLUG_QUERY
-// Query: *[_type == "project" && slug.current == $slug][0] {    _id,    title,    slug,    industry,    summary,    "imageUrl": coverImage.asset->url,    "galleryUrls": gallery[].asset->url,    caseStudy,    techStack,    liveUrl,    priority  }
+// Query: *[_type == "project" && slug.current == $slug][0] {    _id,    title,    "slug": slug.current,    industry,    summary,    coverImage,    gallery,    caseStudy,    techStack,    liveUrl,    priority  }
 export type PROJECT_BY_SLUG_QUERY_RESULT = {
   _id: string;
   title: string | null;
-  slug: Slug | null;
+  slug: string | null;
   industry: string | null;
   summary: string | null;
-  imageUrl: string | null;
-  galleryUrls: Array<string | null> | null;
+  coverImage: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  gallery: Array<{
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }> | null;
   caseStudy: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -290,6 +310,11 @@ export type PROJECT_BY_SLUG_QUERY_RESULT = {
   liveUrl: string | null;
   priority: 1 | 2 | 3 | 4 | 5 | null;
 } | null;
+
+// Source: src/lib/sanity/queries.ts
+// Variable: PROJECT_SLUGS_QUERY
+// Query: *[_type == "project" && defined(slug.current)][].slug.current
+export type PROJECT_SLUGS_QUERY_RESULT = Array<string | null>;
 
 // Source: src/lib/sanity/queries.ts
 // Variable: ALL_CLIENTS_QUERY
@@ -321,8 +346,9 @@ export type SITE_SETTINGS_QUERY_RESULT = {
 // Query TypeMap
 declare global {
   interface SanityQueries {
-    '\n  *[_type == "project"] | order(priority desc, title asc) {\n    _id,\n    title,\n    slug,\n    industry,\n    summary,\n    "imageUrl": coverImage.asset->url,\n    priority,\n    techStack\n  }\n': ALL_PROJECTS_QUERY_RESULT;
-    '\n  *[_type == "project" && slug.current == $slug][0] {\n    _id,\n    title,\n    slug,\n    industry,\n    summary,\n    "imageUrl": coverImage.asset->url,\n    "galleryUrls": gallery[].asset->url,\n    caseStudy,\n    techStack,\n    liveUrl,\n    priority\n  }\n': PROJECT_BY_SLUG_QUERY_RESULT;
+    '\n  *[_type == "project"] | order(priority desc, title asc) {\n    _id,\n    title,\n    "slug": slug.current,\n    industry,\n    summary,\n    coverImage,\n    priority,\n    techStack,\n    liveUrl\n  }\n': ALL_PROJECTS_QUERY_RESULT;
+    '\n  *[_type == "project" && slug.current == $slug][0] {\n    _id,\n    title,\n    "slug": slug.current,\n    industry,\n    summary,\n    coverImage,\n    gallery,\n    caseStudy,\n    techStack,\n    liveUrl,\n    priority\n  }\n': PROJECT_BY_SLUG_QUERY_RESULT;
+    '\n  *[_type == "project" && defined(slug.current)][].slug.current\n': PROJECT_SLUGS_QUERY_RESULT;
     '\n  *[_type == "client"] | order(order asc) {\n    _id,\n    name,\n    "logoUrl": logo.asset->url,\n    url,\n    testimonial,\n    personName,\n    personRole\n  }\n': ALL_CLIENTS_QUERY_RESULT;
     '\n  *[_type == "siteSettings"][0] {\n    contactEmail,\n    phone,\n    address,\n    socialLinks\n  }\n': SITE_SETTINGS_QUERY_RESULT;
   }
