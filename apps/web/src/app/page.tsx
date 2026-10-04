@@ -17,6 +17,7 @@ import type {
   ALL_PROJECTS_QUERY_RESULT,
   SITE_SETTINGS_QUERY_RESULT,
 } from "@/lib/sanity/sanity.types";
+import { InView } from "@/components/ui/in-view";
 
 export default async function HomePage() {
   const [projects, clients] = await Promise.all([
@@ -63,8 +64,10 @@ export default async function HomePage() {
 
       <ServicesSection />
 
-      <section id="projects" className="scroll-mt-20 bg-slate-50 py-12">
-        <ProjectsCarousel projects={projects} />
+      <section id="projects" className="scroll-mt-20 bg-slate-50">
+        <InView delay={500}>
+          <ProjectsCarousel projects={projects} />
+        </InView>
       </section>
 
       <TechStackSection />

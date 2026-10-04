@@ -1,4 +1,5 @@
 import { CheckCircle2, Cpu } from "lucide-react";
+import { InView } from "../ui/in-view";
 
 const TECH_ITEMS = [
   {
@@ -56,36 +57,40 @@ export function TechStackSection() {
               performanslı dijital ürünler geliştiriyoruz.
             </p>
 
-            <div className="mt-8 space-y-3.5">
-              {FEATURES.map((feature) => (
-                <div key={feature} className="flex items-center gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-[#38A3E5] shrink-0" />
-                  <span className="text-sm font-semibold text-slate-200">
-                    {feature}
-                  </span>
+            <InView delay={500}>
+              <div className="mt-8 space-y-3.5">
+                {FEATURES.map((feature) => (
+                  <div key={feature} className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-[#38A3E5] shrink-0" />
+                    <span className="text-sm font-semibold text-slate-200">
+                      {feature}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </InView>
+          </div>
+
+          <InView delay={500}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {TECH_ITEMS.map((item) => (
+                <div
+                  key={item.name}
+                  className="p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-[#38A3E5]/60 hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 group cursor-pointer"
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-2 h-2 rounded-full bg-[#38A3E5] group-hover:scale-125 transition-transform" />
+                    <h3 className="text-sm font-bold text-white group-hover:text-[#38A3E5] transition-colors">
+                      {item.name}
+                    </h3>
+                  </div>
+                  <p className="text-xs text-slate-300/80 leading-relaxed">
+                    {item.desc}
+                  </p>
                 </div>
               ))}
             </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {TECH_ITEMS.map((item) => (
-              <div
-                key={item.name}
-                className="p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-[#38A3E5]/60 hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 group cursor-pointer"
-              >
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-2 h-2 rounded-full bg-[#38A3E5] group-hover:scale-125 transition-transform" />
-                  <h3 className="text-sm font-bold text-white group-hover:text-[#38A3E5] transition-colors">
-                    {item.name}
-                  </h3>
-                </div>
-                <p className="text-xs text-slate-300/80 leading-relaxed">
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
+          </InView>
         </div>
       </div>
     </section>

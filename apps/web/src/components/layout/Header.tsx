@@ -8,7 +8,7 @@ import type { SITE_SETTINGS_QUERY_RESULT } from "@/lib/sanity/sanity.types";
 
 const NAV_ITEMS = [
   { name: "Hizmetler", href: "#services" },
-  { name: "Projeler", href: "#projects" },
+  { name: "Projeler", href: "/projects" },
   { name: "Teknolojiler", href: "#tech-stack" },
 ];
 

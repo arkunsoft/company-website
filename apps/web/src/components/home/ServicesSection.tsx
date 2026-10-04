@@ -1,4 +1,5 @@
 import { Bot, Code2, Cpu, Layers, Smartphone } from "lucide-react";
+import { InView } from "../ui/in-view";
 
 const SERVICES = [
   {
@@ -51,26 +52,28 @@ export function ServicesSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {SERVICES.map((service) => (
-            <div
-              key={service.title}
-              className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-[#38A3E5]/50 hover:bg-white/10 transition-all duration-300 hover:-translate-y-1.5 group cursor-pointer flex flex-col justify-between"
-            >
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-[#38A3E5]/10 border border-[#38A3E5]/20 flex items-center justify-center text-[#38A3E5] mb-5 group-hover:scale-110 group-hover:bg-[#38A3E5] group-hover:text-white transition-all duration-300">
-                  <service.icon className="w-6 h-6" />
+        <InView delay={500}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {SERVICES.map((service) => (
+              <div
+                key={service.title}
+                className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-[#38A3E5]/50 hover:bg-white/10 transition-all duration-300 hover:-translate-y-1.5 group cursor-pointer flex flex-col justify-between"
+              >
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-[#38A3E5]/10 border border-[#38A3E5]/20 flex items-center justify-center text-[#38A3E5] mb-5 group-hover:scale-110 group-hover:bg-[#38A3E5] group-hover:text-white transition-all duration-300">
+                    <service.icon className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-base font-bold text-white mb-2 group-hover:text-[#38A3E5] transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="text-xs text-slate-300/80 leading-relaxed">
+                    {service.description}
+                  </p>
                 </div>
-                <h3 className="text-base font-bold text-white mb-2 group-hover:text-[#38A3E5] transition-colors">
-                  {service.title}
-                </h3>
-                <p className="text-xs text-slate-300/80 leading-relaxed">
-                  {service.description}
-                </p>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </InView>
       </div>
     </section>
   );

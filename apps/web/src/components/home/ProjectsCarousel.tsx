@@ -63,15 +63,23 @@ export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
   return (
     <section
       id="projects"
-      className="relative py-12 bg-[#F8FAFC] overflow-hidden"
+      className="relative py-28 overflow-hidden select-none bg-slate-50"
     >
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none">
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#38A3E5]/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#0F3866]/5 rounded-full blur-3xl" />
+      <div
+        className="absolute inset-0 bg-linear-to-b from-[#0A2545] to-[#0F3866] pointer-events-none z-0 hidden lg:block"
+        style={{
+          clipPath:
+            "polygon(calc(100% - 32vw) 0, 100% 0, calc(32vw) 100%, 0 100%)",
+        }}
+      >
+        <div className="absolute top-0 right-0 w-full h-full bg-[#38A3E5]/5 blur-3xl pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(#38A3E5_1px,transparent_1px)] bg-size-[24px_24px] opacity-30 pointer-events-none" />
       </div>
 
-      <div className="relative container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-8 border-b border-slate-200/80">
+      <div className="relative container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 z-10">
+        {/* Header Katmanı */}
+        <div className="relative flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-8">
+          {/* Sol Başlık Alanı */}
           <div className="max-w-xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#38A3E5]/10 border border-[#38A3E5]/20 text-[#38A3E5] text-xs font-bold uppercase tracking-wider mb-3">
               <Sparkles className="w-3.5 h-3.5" />
@@ -83,13 +91,17 @@ export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
           </div>
 
           <div className="max-w-md md:text-right">
-            <p className="text-base text-slate-600 font-medium leading-relaxed">
+            <p className="text-base text-slate-600 lg:text-slate-300 font-medium leading-relaxed">
               Müşterilerimiz için geliştirdiğimiz{" "}
-              <span className="text-[#0F3866] font-semibold">
+              <span className="text-[#0F3866] lg:text-amber-300 font-bold drop-shadow-xs">
                 modern, ölçeklenebilir
               </span>{" "}
               ve yüksek performanslı dijital çözümler.
             </p>
+          </div>
+
+          <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#0F3866] lg:bg-slate-200/60 flex">
+            <div className="hidden lg:block w-[53%] h-full bg-[#0F3866] rounded-full transition-all duration-300" />
           </div>
         </div>
 
@@ -107,7 +119,7 @@ export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
                 key={project._id}
                 className="pl-6 md:basis-1/2 lg:basis-1/3"
               >
-                <div className="relative h-full bg-white rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-xl hover:border-[#38A3E5]/40 transition-all duration-300 group flex flex-col justify-between overflow-hidden cursor-pointer select-none">
+                <div className="relative h-full bg-white/95 backdrop-blur-md rounded-2xl border border-slate-200/80 shadow-lg hover:shadow-2xl hover:border-[#38A3E5]/50 transition-all duration-300 group flex flex-col justify-between overflow-hidden cursor-pointer select-none">
                   {project.slug && (
                     <Link
                       href={`/projects/${project.slug}`}
@@ -139,7 +151,7 @@ export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
 
                     {project.industry && (
                       <div className="absolute top-4 left-4 z-10 pointer-events-none">
-                        <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-white/95 backdrop-blur-md text-[#0F3866] shadow-sm border border-slate-200/50 cursor-pointer select-none">
+                        <span className="px-3 py-1.5 rounded-lg text-xs font-bold bg-white/95 backdrop-blur-md text-[#0F3866] shadow-xs border border-slate-200/50 cursor-pointer select-none">
                           {project.industry}
                         </span>
                       </div>

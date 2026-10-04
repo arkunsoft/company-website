@@ -6,6 +6,7 @@ import Link from "next/link";
 import { sanityFetch } from "@/lib/sanity/fetch";
 import { SITE_SETTINGS_QUERY } from "@/lib/sanity/queries";
 import type { SITE_SETTINGS_QUERY_RESULT } from "@/lib/sanity/sanity.types";
+import { InView } from "../ui/in-view";
 
 export async function Footer() {
   const settings = await sanityFetch<SITE_SETTINGS_QUERY_RESULT>({
@@ -126,19 +127,21 @@ export async function Footer() {
         <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400">
           <p>© {new Date().getFullYear()} ArkunSoft. Tüm hakları saklıdır.</p>
 
-          <p className="flex items-center gap-1.5">
-            <span>Designed with</span>
-            <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500 animate-pulse inline-block" />
-            <span>by</span>
-            <a
-              href="https://github.com/okanbatuk"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-2 py-0.5 rounded-md font-semibold text-slate-200 bg-white/5 border border-white/10 hover:border-[#38A3E5]/50 hover:bg-[#38A3E5]/20 hover:text-white transition-all duration-200"
-            >
-              myrn
-            </a>
-          </p>
+          <InView delay={500}>
+            <p className="flex items-center gap-1.5">
+              <span>Designed with</span>
+              <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500 animate-pulse inline-block" />
+              <span>by</span>
+              <a
+                href="https://github.com/okanbatuk"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-2 py-0.5 rounded-md font-semibold text-slate-200 bg-white/5 border border-white/10 hover:border-[#38A3E5]/50 hover:bg-[#38A3E5]/20 hover:text-white transition-all duration-200"
+              >
+                myrn
+              </a>
+            </p>
+          </InView>
         </div>
       </div>
     </footer>
