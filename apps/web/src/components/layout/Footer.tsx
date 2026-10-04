@@ -49,7 +49,7 @@ export async function Footer() {
               </li>
               <li>
                 <Link
-                  href="#projects"
+                  href="/projects"
                   className="-mx-2 inline-block px-2 py-1 rounded-md border border-transparent hover:border-[#38A3E5]/30 hover:bg-[#38A3E5]/15 hover:text-white transition-all duration-200 hover:translate-x-1"
                 >
                   Projeler

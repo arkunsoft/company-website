@@ -1,12 +1,19 @@
 // apps/web/src/app/api/revalidate/route.ts
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
 import { parseBody } from "next-sanity/webhook";
 import { sanityRevalidateSecret } from "@/lib/sanity/env";
 
+interface SanityWebhookBody {
+  _type?: string;
+  slug?: {
+    current?: string;
+  };
+}
+
 export async function POST(req: NextRequest) {
   try {
-    const { isValidSignature, body } = await parseBody<{ _type?: string }>(
+    const { isValidSignature, body } = await parseBody<SanityWebhookBody>(
       req,
       sanityRevalidateSecret,
     );
@@ -27,10 +34,20 @@ export async function POST(req: NextRequest) {
 
     revalidateTag(body._type, { expire: 0 });
 
+    if (body._type === "project") {
+      revalidatePath("/");
+      revalidatePath("/projects");
+
+      if (body.slug?.current) {
+        revalidatePath(`/projects/${body.slug.current}`);
+      }
+    }
+
     return NextResponse.json({
       status: 200,
       revalidated: true,
       type: body._type,
+      slug: body.slug?.current || null,
       now: Date.now(),
     });
   } catch (err) {
