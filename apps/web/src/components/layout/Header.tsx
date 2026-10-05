@@ -2,14 +2,16 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getSocialIcon } from "@/lib/getSocialIcon";
 import type { SITE_SETTINGS_QUERY_RESULT } from "@/lib/sanity/sanity.types";
 
 const NAV_ITEMS = [
-  { name: "Hizmetler", href: "#services" },
+  { name: "Anasayfa", href: "/" },
   { name: "Projeler", href: "/projects" },
-  { name: "Teknolojiler", href: "#tech-stack" },
+  { name: "Hakkımızda", href: "/about" },
+  { name: "İletişim", href: "/contact" },
 ];
 
 interface HeaderProps {
@@ -19,6 +21,7 @@ interface HeaderProps {
 export function Header({ settings }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
   const socialLinks = settings?.socialLinks ?? [];
 
   useEffect(() => {
@@ -29,6 +32,13 @@ export function Header({ settings }: HeaderProps) {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const isActiveLink = (href: string) => {
+    if (href === "/") {
+      return pathname === "/";
+    }
+    return pathname.startsWith(href);
+  };
 
   const ITEM_WIDTH = 56;
   const TOTAL_WIDTH = Math.max(socialLinks.length * ITEM_WIDTH, 140);
@@ -44,13 +54,20 @@ export function Header({ settings }: HeaderProps) {
         }`}
       >
         <div className="relative group py-1 flex flex-col items-center justify-center">
-          <Link href="/" className="flex items-center justify-center shrink-0">
+          <Link
+            href="/"
+            className="relative flex items-center justify-center shrink-0 px-3 py-1.5 rounded-xl border border-transparent transition-all duration-300 hover:bg-white/10 hover:border-white/20 hover:backdrop-blur-md group/logo"
+          >
+            {/* Hover Anında Logonun Arkasında Açılan Glow (Işıltı) */}
+            <div className="absolute inset-0 rounded-xl bg-linear-to-r from-[#38A3E5]/0 via-[#38A3E5]/30 to-[#00F2FE]/0 opacity-0 blur-md transition-opacity duration-300 group-hover/logo:opacity-100 pointer-events-none" />
+
+            {/* Logo: Sadece ve Her Zaman Düz Beyaz (brightness-0 invert Sabit) */}
             <Image
               src="/arkunsoft.png"
               alt="ArkunSoft Logo"
               width={140}
               height={36}
-              className="h-8 w-auto object-contain brightness-0 invert transition-transform duration-300 group-hover:scale-105"
+              className="relative z-10 h-8 w-auto object-contain brightness-0 invert transition-transform duration-300 group-hover/logo:scale-105"
             />
           </Link>
 
@@ -130,17 +147,30 @@ export function Header({ settings }: HeaderProps) {
           )}
         </div>
 
+        {/* Masaüstü Menü */}
         <ul className="hidden md:flex items-center gap-2">
-          {NAV_ITEMS.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                className="px-4 py-2 text-xs font-semibold text-slate-100 rounded-xl border border-transparent hover:border-[#38A3E5]/40 hover:bg-[#38A3E5]/15 hover:text-white transition-all duration-200 hover:shadow-sm hover:shadow-[#38A3E5]/20 block"
-              >
-                {item.name}
-              </Link>
-            </li>
-          ))}
+          {NAV_ITEMS.map((item) => {
+            const active = isActiveLink(item.href);
+
+            return (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className={`relative px-4 py-2 text-xs font-semibold rounded-xl border transition-all duration-200 group block overflow-hidden ${
+                    active
+                      ? "bg-[#38A3E5]/25 text-white border-[#38A3E5]/50 shadow-xs shadow-[#38A3E5]/30"
+                      : "text-slate-100 border-transparent hover:bg-[#38A3E5]/15 hover:text-white"
+                  }`}
+                >
+                  <span className="relative z-10">{item.name}</span>
+
+                  {!active && (
+                    <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-3/5 h-0.5 bg-[#38A3E5] rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out pointer-events-none" />
+                  )}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="hidden md:flex items-center">
@@ -185,6 +215,7 @@ export function Header({ settings }: HeaderProps) {
           </svg>
         </button>
 
+        {/* Mobil Menü */}
         <div
           className={`absolute top-full left-0 right-0 mt-3 p-4 rounded-2xl bg-[#0F3866]/95 backdrop-blur-xl border border-white/15 shadow-2xl shadow-black/50 md:hidden flex flex-col gap-3 transition-all duration-300 origin-top ${
             mobileMenuOpen
@@ -193,17 +224,25 @@ export function Header({ settings }: HeaderProps) {
           }`}
         >
           <ul className="flex flex-col gap-1">
-            {NAV_ITEMS.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="px-4 py-3 text-sm font-semibold text-slate-100 rounded-xl hover:bg-[#38A3E5]/20 hover:text-white transition-all block border border-transparent hover:border-[#38A3E5]/30"
-                >
-                  {item.name}
-                </Link>
-              </li>
-            ))}
+            {NAV_ITEMS.map((item) => {
+              const active = isActiveLink(item.href);
+
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`px-4 py-3 text-sm font-semibold rounded-xl transition-all block border ${
+                      active
+                        ? "bg-[#38A3E5]/25 text-white border-[#38A3E5]/50"
+                        : "text-slate-100 border-transparent hover:bg-[#38A3E5]/20 hover:text-white"
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
 
           <div className="pt-2 border-t border-white/10 flex flex-col gap-3">
