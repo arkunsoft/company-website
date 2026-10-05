@@ -1,84 +1,53 @@
-// apps/web/src/components/sanity/CustomPortableText.tsx
-
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
-import Image from "next/image";
-import { urlFor } from "@/lib/sanity/image";
+import { CheckCircle2 } from "lucide-react";
 
 const components: PortableTextComponents = {
   block: {
-    h1: ({ children }) => (
-      <h1 className="text-3xl font-bold text-white mt-8 mb-4">{children}</h1>
-    ),
     h2: ({ children }) => (
-      <h2 className="text-2xl font-bold text-white mt-6 mb-3 border-b border-white/10 pb-2">
+      <h2 className="text-xl sm:text-2xl font-extrabold text-[#0F3866] mt-10 mb-4 pb-3 border-b border-slate-200 flex items-center gap-3">
+        <span className="w-2 h-6 bg-[#00F2FE] rounded-full inline-block" />
         {children}
       </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="text-xl font-semibold text-amber-300 mt-5 mb-2">
+      <h3 className="text-lg font-bold text-slate-900 mt-8 mb-3 pl-3 border-l-2 border-blue-500">
         {children}
       </h3>
     ),
     normal: ({ children }) => (
-      <p className="text-slate-300 leading-relaxed mb-4">{children}</p>
+      <p className="text-slate-700 text-sm sm:text-base leading-relaxed mb-5 font-normal">
+        {children}
+      </p>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="border-l-4 border-[#38A3E5] pl-4 my-4 italic text-slate-200 bg-white/5 py-2 pr-2 rounded-r">
+      <blockquote className="my-6 p-5 rounded-2xl bg-blue-50/60 border-l-4 border-[#1E56A0] text-slate-800 italic text-sm font-medium">
         {children}
       </blockquote>
     ),
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="list-disc list-inside space-y-2 text-slate-300 my-4 pl-2">
+      <ul className="space-y-3 my-6 font-medium text-slate-700 text-sm sm:text-base">
         {children}
       </ul>
     ),
     number: ({ children }) => (
-      <ol className="list-decimal list-inside space-y-2 text-slate-300 my-4 pl-2">
+      <ol className="list-decimal list-inside space-y-2 my-6 text-slate-700 font-semibold text-sm sm:text-base">
         {children}
       </ol>
     ),
   },
-  marks: {
-    link: ({ value, children }) => {
-      const rel = !value.href.startsWith("/")
-        ? "noreferrer noopener"
-        : undefined;
-      return (
-        <a
-          href={value.href}
-          rel={rel}
-          target={rel ? "_blank" : undefined}
-          className="text-[#38A3E5] underline underline-offset-4 hover:text-amber-300 transition-colors"
-        >
-          {children}
-        </a>
-      );
-    },
-    code: ({ children }) => (
-      <code className="bg-white/10 text-amber-300 px-1.5 py-0.5 rounded text-sm font-mono">
-        {children}
-      </code>
+  listItem: {
+    bullet: ({ children }) => (
+      <li className="flex items-start gap-3">
+        <CheckCircle2 className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+        <span>{children}</span>
+      </li>
     ),
-  },
-  types: {
-    image: ({ value }) => {
-      if (!value?.asset?._ref) return null;
-      return (
-        <div className="relative aspect-video w-full my-6 rounded-xl overflow-hidden border border-white/10">
-          <Image
-            src={urlFor(value).width(1000).height(600).url()}
-            alt={value.alt || "Case study image"}
-            fill
-            className="object-cover"
-          />
-        </div>
-      );
-    },
   },
 };
 
 export function CustomPortableText({ value }: { value: unknown }) {
+  if (!value) return null;
   return <PortableText value={value} components={components} />;
 }
