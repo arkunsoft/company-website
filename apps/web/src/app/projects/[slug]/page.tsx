@@ -1,13 +1,14 @@
 import { ArrowLeft, ExternalLink, Layers } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProjectCaseStudy } from "@/components/projects/ProjectCaseStudy";
 import { ProjectHeroGallery } from "@/components/projects/ProjectHeroGallery";
 import { InView } from "@/components/ui/in-view";
 import { sanityFetch } from "@/lib/sanity/fetch";
+import { urlFor } from "@/lib/sanity/image";
 import { PROJECT_BY_SLUG_QUERY } from "@/lib/sanity/queries";
 import type { PROJECT_BY_SLUG_QUERY_RESULT } from "@/lib/sanity/sanity.types";
-import { urlFor } from "@/lib/sanity/image";
 
 interface ProjectDetailPageProps {
   params: Promise<{
@@ -15,7 +16,9 @@ interface ProjectDetailPageProps {
   }>;
 }
 
-export async function generateMetadata({ params }: ProjectDetailPageProps) {
+export async function generateMetadata({
+  params,
+}: ProjectDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
   const project = await sanityFetch<PROJECT_BY_SLUG_QUERY_RESULT>({
     query: PROJECT_BY_SLUG_QUERY,
@@ -24,15 +27,51 @@ export async function generateMetadata({ params }: ProjectDetailPageProps) {
 
   if (!project) {
     return {
-      title: "Proje Bulunamadı | ArkunSoft",
+      title: "Proje Bulunamadı",
+      robots: {
+        index: false,
+        follow: false,
+      },
     };
   }
 
+  const projectTitle = project.title ?? "Proje Detayı";
+  const projectDescription =
+    project.summary ??
+    `${projectTitle} projesinin detaylı incelemesi ve teknik mimarisi.`;
+
+  const ogImageUrl = project.coverImage
+    ? urlFor(project.coverImage).width(1200).height(630).quality(90).url()
+    : undefined;
+
   return {
-    title: `${project.title} | ArkunSoft Projeleri`,
-    description:
-      project.summary ??
-      `${project.title} projesinin detaylı incelemesi ve teknik mimarisi.`,
+    title: projectTitle,
+    description: projectDescription,
+    alternates: {
+      canonical: `/projects/${slug}`,
+    },
+    openGraph: {
+      title: `${projectTitle} | ArkunSoft Projeleri`,
+      description: projectDescription,
+      url: `https://arkunsoft.com/projects/${slug}`,
+      type: "article",
+      images: ogImageUrl
+        ? [
+            {
+              url: ogImageUrl,
+              width: 1200,
+              height: 630,
+              alt: projectTitle,
+            },
+          ]
+        : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${projectTitle} | ArkunSoft Projeleri`,
+      description: projectDescription,
+      images: ogImageUrl ? [ogImageUrl] : [],
+    },
   };
 }
 
@@ -59,14 +98,12 @@ export default async function ProjectDetailPage({
 
   return (
     <main className="min-h-screen bg-slate-50">
-      {/* 1. Hero Section */}
       <section className="relative pt-32 pb-20 bg-linear-to-b from-[#1E56A0] via-[#16417C] to-[#0D2B52] border-b border-white/15 overflow-hidden select-none">
         <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-162.5 h-65 bg-[#38A3E5]/20 blur-3xl rounded-full pointer-events-none" />
         <div className="absolute top-0 right-10 w-96 h-96 bg-[#00F2FE]/15 blur-3xl rounded-full pointer-events-none" />
 
         <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Sol Kolon: Metin Alanı Genişletildi (lg:col-span-7) */}
             <div className="lg:col-span-7 space-y-6">
               <InView delay={100}>
                 <Link
@@ -117,7 +154,6 @@ export default async function ProjectDetailPage({
               </InView>
             </div>
 
-            {/* Sağ Kolon: Interaktif 3D Galeri (lg:col-span-5) */}
             <div className="lg:col-span-5 flex justify-center items-center w-full">
               <InView delay={200} className="w-full flex justify-center">
                 <ProjectHeroGallery
@@ -130,10 +166,8 @@ export default async function ProjectDetailPage({
         </div>
       </section>
 
-      {/* 2. İçerik ve Vaka Analizi */}
       <section className="py-8 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl space-y-10">
-          {/* Kullanılan Teknolojiler */}
           {project.techStack && project.techStack.length > 0 && (
             <InView delay={300}>
               <div className="p-6 bg-white rounded-2xl border border-slate-200 shadow-xs space-y-3">
@@ -154,7 +188,6 @@ export default async function ProjectDetailPage({
             </InView>
           )}
 
-          {/* Vaka Analizi Dashboard Yapısı */}
           {project.caseStudy && (
             <InView delay={400}>
               <ProjectCaseStudy

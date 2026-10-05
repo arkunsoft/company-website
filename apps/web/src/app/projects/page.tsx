@@ -1,14 +1,29 @@
 import { FolderCheck, Grid, Layers } from "lucide-react";
+import type { Metadata } from "next";
 import { ProjectFilter } from "@/components/projects/ProjectFilter";
 import { InView } from "@/components/ui/in-view";
 import { sanityFetch } from "@/lib/sanity/fetch";
 import { ALL_PROJECTS_QUERY } from "@/lib/sanity/queries";
 import type { ALL_PROJECTS_QUERY_RESULT } from "@/lib/sanity/sanity.types";
 
-export const metadata = {
-  title: "Projelerimiz | ArkunSoft",
+export const metadata: Metadata = {
+  title: "Projelerimiz",
   description:
-    "ArkunSoft tarafından geliştirilen yüksek performanslı projeler ve vaka analizleri.",
+    "ArkunSoft tarafından geliştirilen yüksek performanslı projeler, özel yazılım çözümleri ve vaka analizleri.",
+  alternates: {
+    canonical: "/projects",
+  },
+  openGraph: {
+    title: "Projelerimiz | ArkunSoft",
+    description:
+      "ArkunSoft tarafından geliştirilen yüksek performanslı projeler, özel yazılım çözümleri ve vaka analizleri.",
+    url: "https://arkunsoft.com/projects",
+  },
+  twitter: {
+    title: "Projelerimiz | ArkunSoft",
+    description:
+      "ArkunSoft tarafından geliştirilen yüksek performanslı projeler, özel yazılım çözümleri ve vaka analizleri.",
+  },
 };
 
 export default async function ProjectsPage() {
@@ -18,7 +33,6 @@ export default async function ProjectsPage() {
 
   return (
     <main className="min-h-screen bg-slate-50">
-      {/* 1. Hero Banner */}
       <section className="relative pt-32 pb-16 bg-linear-to-b from-[#1E56A0] via-[#16417C] to-[#0D2B52] border-b border-white/15 overflow-hidden select-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-162.5 h-65 bg-[#38A3E5]/25 blur-3xl rounded-full pointer-events-none" />
         <div className="absolute top-0 right-1/4 w-80 h-80 bg-[#00F2FE]/15 blur-3xl rounded-full pointer-events-none" />
@@ -66,7 +80,6 @@ export default async function ProjectsPage() {
         </div>
       </section>
 
-      {/* 2. Projects Filter & Grid Section */}
       <section className="py-12 md:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto space-y-8">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200/80 pb-6">
@@ -85,7 +98,6 @@ export default async function ProjectsPage() {
             </p>
           </div>
 
-          {/* İnteraktif Sektör Filtreleme ve Dinamik Kart Grid Yapısı */}
           <ProjectFilter projects={projects} />
         </div>
       </section>

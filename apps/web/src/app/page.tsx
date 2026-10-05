@@ -1,4 +1,5 @@
 import { Sparkles } from "lucide-react";
+import type { Metadata } from "next";
 import { ContactSection } from "@/components/home/ContactSection";
 import { HeroBackground } from "@/components/home/HeroBackground";
 import { ProjectsCarousel } from "@/components/home/ProjectsCarousel";
@@ -6,6 +7,7 @@ import { ReferenceMarquee } from "@/components/home/ReferenceMarquee";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { StatsSection } from "@/components/home/StatsSection";
 import { TechStackSection } from "@/components/home/TechStackSection";
+import { InView } from "@/components/ui/in-view";
 import { sanityFetch } from "@/lib/sanity/fetch";
 import {
   ALL_CLIENTS_QUERY,
@@ -17,23 +19,56 @@ import type {
   ALL_PROJECTS_QUERY_RESULT,
   SITE_SETTINGS_QUERY_RESULT,
 } from "@/lib/sanity/sanity.types";
-import { InView } from "@/components/ui/in-view";
+
+export const metadata: Metadata = {
+  title: "ArkunSoft | Geleceğin Dijital Sistemleri",
+  description:
+    "Yüksek performanslı, güvenli ve modern web platformları ile kurumsal süreçlerinizi uçtan uca dijitalleştiriyoruz.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "ArkunSoft | Geleceğin Dijital Sistemleri",
+    description:
+      "Yüksek performanslı, güvenli ve modern web platformları ile kurumsal süreçlerinizi uçtan uca dijitalleştiriyoruz.",
+    url: "https://arkunsoft.com",
+    siteName: "ArkunSoft",
+    locale: "tr_TR",
+    type: "website",
+    images: [
+      {
+        url: "/arkunsoft.png",
+        width: 1200,
+        height: 630,
+        alt: "ArkunSoft Teknoloji & Yazılım",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ArkunSoft | Geleceğin Dijital Sistemleri",
+    description:
+      "Yüksek performanslı, güvenli ve modern web platformları ile kurumsal süreçlerinizi uçtan uca dijitalleştiriyoruz.",
+    images: ["/arkunsoft.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 export default async function HomePage() {
-  const [projects, clients] = await Promise.all([
+  const [projects, clients, settings] = await Promise.all([
     sanityFetch<ALL_PROJECTS_QUERY_RESULT>({ query: ALL_PROJECTS_QUERY }),
     sanityFetch<ALL_CLIENTS_QUERY_RESULT>({ query: ALL_CLIENTS_QUERY }),
+    sanityFetch<SITE_SETTINGS_QUERY_RESULT>({ query: SITE_SETTINGS_QUERY }),
   ]);
-  const settings = await sanityFetch<SITE_SETTINGS_QUERY_RESULT>({
-    query: SITE_SETTINGS_QUERY,
-  });
 
   return (
     <>
       <section className="relative py-28 md:py-36 overflow-hidden border-b border-white/10 select-none">
         <HeroBackground />
 
-        {/* Ambient Hero Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-60 bg-[#38A3E5]/20 blur-3xl rounded-full pointer-events-none" />
 
         <InView delay={500}>
