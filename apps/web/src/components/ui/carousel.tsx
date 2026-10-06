@@ -120,7 +120,6 @@ function Carousel({
       <section
         onKeyDownCapture={handleKeyDown}
         className={cn("relative", className)}
-        role="region"
         aria-roledescription="carousel"
         aria-label={props["aria-label"] ?? "Carousel"}
         data-slot="carousel"
@@ -157,6 +156,7 @@ function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
   const { orientation } = useCarousel();
 
   return (
+    // biome-ignore lint/a11y/useSemanticElements: Carousel slides require group role for ARIA accessibility spec
     <div
       role="group"
       aria-roledescription="slide"

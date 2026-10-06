@@ -37,7 +37,6 @@ export function ProjectHeroGallery({
     <div className="relative w-full flex flex-col items-center select-none">
       <div
         className="relative w-full max-w-md h-85 sm:h-100 flex items-center justify-center"
-
         style={{ perspective: "1000px" }}
       >
         {gallery.map((img, idx) => {
