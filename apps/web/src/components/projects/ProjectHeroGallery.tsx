@@ -128,7 +128,6 @@ export function ProjectHeroGallery({
           <ChevronRight className="w-5 h-5 text-[#00F2FE]" />
         </button>
       </div>
-      )
     </div>
   );
 }

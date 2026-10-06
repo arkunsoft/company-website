@@ -98,14 +98,17 @@ export default async function ProjectDetailPage({
 
   return (
     <main className="min-h-screen bg-slate-50">
-      <section className="relative pt-32 pb-20 bg-linear-to-b from-[#1E56A0] via-[#16417C] to-[#0D2B52] border-b border-white/15 overflow-hidden select-none">
+      <section className="relative min-h-svh flex flex-col justify-center pt-32 pb-20 bg-linear-to-b from-[#1E56A0] via-[#16417C] to-[#0D2B52] border-b border-white/15 overflow-hidden select-none">
         <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-162.5 h-65 bg-[#38A3E5]/20 blur-3xl rounded-full pointer-events-none" />
         <div className="absolute top-0 right-10 w-96 h-96 bg-[#00F2FE]/15 blur-3xl rounded-full pointer-events-none" />
 
-        <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 relative z-10 my-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            <div className="lg:col-span-7 space-y-6">
-              <InView delay={100}>
+            <div className="lg:col-span-7">
+              <InView
+                delay={100}
+                className="flex flex-col items-center text-center lg:items-start lg:text-left space-y-6"
+              >
                 <Link
                   href="/projects"
                   className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-200 hover:text-[#00F2FE] transition-colors mb-2"
@@ -114,7 +117,7 @@ export default async function ProjectDetailPage({
                   <span>Tüm Projelere Dön</span>
                 </Link>
 
-                <div className="flex flex-wrap items-center gap-2.5">
+                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
                   {project.industry && (
                     <span className="py-1 px-3.5 rounded-full text-xs font-bold bg-[#00F2FE]/15 text-[#00F2FE] border border-[#00F2FE]/30 backdrop-blur-md capitalize">
                       {project.industry}
@@ -126,20 +129,20 @@ export default async function ProjectDetailPage({
                   </span>
                 </div>
 
-                <div className="space-y-4 mt-4">
+                <div className="space-y-4 mt-4 w-full">
                   <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
                     {project.title}
                   </h1>
 
                   {project.summary && (
-                    <p className="text-blue-100 text-sm sm:text-base leading-relaxed font-normal max-w-2xl">
+                    <p className="text-blue-100 text-sm sm:text-base leading-relaxed font-normal max-w-2xl mx-auto lg:mx-0">
                       {project.summary}
                     </p>
                   )}
                 </div>
 
                 {project.liveUrl && (
-                  <div className="pt-4">
+                  <div className="pt-4 flex justify-center lg:justify-start w-full">
                     <a
                       href={project.liveUrl}
                       target="_blank"
