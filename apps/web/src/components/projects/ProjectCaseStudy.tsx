@@ -7,6 +7,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import Image from "next/image";
+import type { TypedObject } from "sanity";
 import { CustomPortableText } from "@/components/sanity/CustomPortableText";
 
 interface ProjectCaseStudyProps {
@@ -104,7 +105,9 @@ export function ProjectCaseStudy({
             )}
 
             <article className="prose prose-slate max-w-none font-sans text-slate-700 leading-relaxed">
-              <CustomPortableText value={caseStudy} />
+              <CustomPortableText
+                value={caseStudy as TypedObject | TypedObject[] | undefined}
+              />
             </article>
 
             {/* Float hizalamasının alt elemanlara taşmaması için clearfix */}

@@ -1,5 +1,6 @@
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import { CheckCircle2 } from "lucide-react";
+import type { TypedObject } from "sanity";
 
 const components: PortableTextComponents = {
   block: {
@@ -47,7 +48,16 @@ const components: PortableTextComponents = {
   },
 };
 
-export function CustomPortableText({ value }: { value: unknown }) {
+export function CustomPortableText({
+  value,
+}: {
+  value: TypedObject | TypedObject[] | null | undefined;
+}) {
   if (!value) return null;
-  return <PortableText value={value} components={components} />;
+  return (
+    <PortableText
+      value={value as TypedObject | TypedObject[]}
+      components={components}
+    />
+  );
 }
