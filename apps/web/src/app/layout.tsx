@@ -29,6 +29,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon-v2.ico",
     shortcut: "/favicon-v2.ico",
+    apple: "/apple-icon.png",
   },
   openGraph: {
     type: "website",
@@ -38,12 +39,21 @@ export const metadata: Metadata = {
     title: "ArkunSoft | Geleceğin Dijital Sistemleri",
     description:
       "Yüksek performanslı, güvenli ve modern web, mobil ve yapay zeka çözümleri ile kurumsal süreçlerinizi uçtan uca dijitalleştiriyoruz.",
+    images: [
+      {
+        url: "/arkunsoft.png",
+        width: 1200,
+        height: 630,
+        alt: "ArkunSoft Teknoloji & Yazılım",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "ArkunSoft | Geleceğin Dijital Sistemleri",
     description:
       "Yüksek performanslı, güvenli ve modern web, mobil ve yapay zeka çözümleri ile kurumsal süreçlerinizi uçtan uca dijitalleştiriyoruz.",
+    images: ["/arkunsoft.png"],
   },
   robots: {
     index: true,
@@ -67,7 +77,11 @@ const playfair = Playfair_Display({
   style: ["italic"],
 });
 
-export default async function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const settings = await sanityFetch<SITE_SETTINGS_QUERY_RESULT>({
     query: SITE_SETTINGS_QUERY,
   });

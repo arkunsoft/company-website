@@ -21,20 +21,10 @@ import type {
 } from "@/lib/sanity/sanity.types";
 
 export const metadata: Metadata = {
-  title: "ArkunSoft | Geleceğin Dijital Sistemleri",
-  description:
-    "Yüksek performanslı, güvenli ve modern web platformları ile kurumsal süreçlerinizi uçtan uca dijitalleştiriyoruz.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "ArkunSoft | Geleceğin Dijital Sistemleri",
-    description:
-      "Yüksek performanslı, güvenli ve modern web platformları ile kurumsal süreçlerinizi uçtan uca dijitalleştiriyoruz.",
-    url: "https://arkunsoft.com",
-    siteName: "ArkunSoft",
-    locale: "tr_TR",
-    type: "website",
     images: [
       {
         url: "/arkunsoft.png",
@@ -43,17 +33,6 @@ export const metadata: Metadata = {
         alt: "ArkunSoft - Geleceğin Dijital Sistemleri",
       },
     ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "ArkunSoft | Geleceğin Dijital Sistemleri",
-    description:
-      "Yüksek performanslı, güvenli ve modern web platformları ile kurumsal süreçlerinizi uçtan uca dijitalleştiriyoruz.",
-    images: ["/arkunsoft.png"],
-  },
-  robots: {
-    index: true,
-    follow: true,
   },
 };
 

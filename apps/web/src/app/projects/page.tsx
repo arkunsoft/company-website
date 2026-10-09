@@ -18,8 +18,10 @@ export const metadata: Metadata = {
     description:
       "ArkunSoft tarafından geliştirilen yüksek performanslı projeler, özel yazılım çözümleri ve vaka analizleri.",
     url: "https://arkunsoft.com/projects",
+    type: "website",
   },
   twitter: {
+    card: "summary_large_image",
     title: "Projelerimiz | ArkunSoft",
     description:
       "ArkunSoft tarafından geliştirilen yüksek performanslı projeler, özel yazılım çözümleri ve vaka analizleri.",
