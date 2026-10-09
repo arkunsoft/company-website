@@ -60,6 +60,7 @@ export function Header({ settings }: HeaderProps) {
             <div className="absolute inset-0 rounded-xl bg-linear-to-r from-[#38A3E5]/0 via-[#38A3E5]/30 to-[#00F2FE]/0 opacity-0 blur-md transition-opacity duration-300 group-hover/logo:opacity-100 pointer-events-none" />
 
             <Image
+              priority
               src="/arkunsoft.png"
               alt="ArkunSoft Logo"
               width={140}

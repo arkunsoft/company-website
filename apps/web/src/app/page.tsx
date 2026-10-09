@@ -21,10 +21,15 @@ import type {
 } from "@/lib/sanity/sanity.types";
 
 export const metadata: Metadata = {
+  description:
+    "Yüksek performanslı, güvenli ve modern web platformları ile kurumsal süreçlerinizi uçtan uca dijitalleştiriyoruz.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
+    title: "ArkunSoft | Geleceğin Dijital Sistemleri",
+    description:
+      "Yüksek performanslı, güvenli ve modern web platformları ile kurumsal süreçlerinizi uçtan uca dijitalleştiriyoruz.",
     images: [
       {
         url: "/arkunsoft.png",
