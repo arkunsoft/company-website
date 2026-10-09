@@ -11,7 +11,6 @@ const NAV_ITEMS = [
   { name: "Anasayfa", href: "/" },
   { name: "Projeler", href: "/projects" },
   { name: "Hakkımızda", href: "/about" },
-  { name: "İletişim", href: "/contact" },
 ];
 
 interface HeaderProps {
@@ -58,10 +57,8 @@ export function Header({ settings }: HeaderProps) {
             href="/"
             className="relative flex items-center justify-center shrink-0 px-3 py-1.5 rounded-xl border border-transparent transition-all duration-300 hover:bg-white/10 hover:border-white/20 hover:backdrop-blur-md group/logo"
           >
-            {/* Hover Anında Logonun Arkasında Açılan Glow (Işıltı) */}
             <div className="absolute inset-0 rounded-xl bg-linear-to-r from-[#38A3E5]/0 via-[#38A3E5]/30 to-[#00F2FE]/0 opacity-0 blur-md transition-opacity duration-300 group-hover/logo:opacity-100 pointer-events-none" />
 
-            {/* Logo: Sadece ve Her Zaman Düz Beyaz (brightness-0 invert Sabit) */}
             <Image
               src="/arkunsoft.png"
               alt="ArkunSoft Logo"
@@ -147,7 +144,6 @@ export function Header({ settings }: HeaderProps) {
           )}
         </div>
 
-        {/* Masaüstü Menü */}
         <ul className="hidden md:flex items-center gap-2">
           {NAV_ITEMS.map((item) => {
             const active = isActiveLink(item.href);
@@ -175,10 +171,10 @@ export function Header({ settings }: HeaderProps) {
 
         <div className="hidden md:flex items-center">
           <Link
-            href="#contact"
+            href="/contact"
             className="px-5 py-2 text-xs font-bold rounded-xl bg-[#38A3E5] text-white hover:bg-[#38A3E5]/90 transition-all shadow-md shadow-[#38A3E5]/25 hover:scale-105 active:scale-95"
           >
-            İletişime Geç
+            Bize Ulaşın..
           </Link>
         </div>
 
@@ -215,7 +211,6 @@ export function Header({ settings }: HeaderProps) {
           </svg>
         </button>
 
-        {/* Mobil Menü */}
         <div
           className={`absolute top-full left-0 right-0 mt-3 p-4 rounded-2xl bg-[#0F3866]/95 backdrop-blur-xl border border-white/15 shadow-2xl shadow-black/50 md:hidden flex flex-col gap-3 transition-all duration-300 origin-top ${
             mobileMenuOpen
@@ -251,7 +246,7 @@ export function Header({ settings }: HeaderProps) {
               onClick={() => setMobileMenuOpen(false)}
               className="w-full text-center px-5 py-3 text-sm font-bold rounded-xl bg-[#38A3E5] text-white hover:bg-[#38A3E5]/90 transition-all shadow-md shadow-[#38A3E5]/25 active:scale-95"
             >
-              İletişime Geç
+              Bize Uaşın..
             </Link>
           </div>
         </div>

@@ -114,7 +114,7 @@ export async function Footer() {
             <ul className="space-y-1 text-xs text-slate-300">
               <li>
                 <Link
-                  href="#"
+                  href="/privacy"
                   className="-mx-2 inline-block px-2 py-1 rounded-md border border-transparent hover:border-[#38A3E5]/30 hover:bg-[#38A3E5]/15 hover:text-white transition-all duration-200 hover:translate-x-1"
                 >
                   Gizlilik Politikası
@@ -122,7 +122,7 @@ export async function Footer() {
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="/terms"
                   className="-mx-2 inline-block px-2 py-1 rounded-md border border-transparent hover:border-[#38A3E5]/30 hover:bg-[#38A3E5]/15 hover:text-white transition-all duration-200 hover:translate-x-1"
                 >
                   Kullanım Koşulları

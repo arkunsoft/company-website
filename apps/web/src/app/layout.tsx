@@ -27,8 +27,8 @@ export const metadata: Metadata = {
   creator: "ArkunSoft",
   publisher: "ArkunSoft",
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
+    icon: "/favicon-v2.ico",
+    shortcut: "/favicon-v2.ico",
   },
   openGraph: {
     type: "website",

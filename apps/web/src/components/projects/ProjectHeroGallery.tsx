@@ -1,6 +1,6 @@
 "use client";
 
-import type { SanityImageSource } from "@sanity/image-url";
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";

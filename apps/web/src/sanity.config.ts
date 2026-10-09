@@ -1,17 +1,17 @@
-// apps/studio/sanity.config.ts
+import { client, project, siteSettings } from "@company-site/schema";
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
-import { schemaTypes } from "./schemaTypes";
 
 const SINGLETON_TYPES = new Set(["siteSettings"]);
 
 export default defineConfig({
   name: "default",
   title: "company-site",
+  basePath: "/studio",
 
-  projectId: "bfhv4sta",
-  dataset: "production",
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "bfhv4sta",
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
 
   plugins: [
     structureTool({
@@ -35,7 +35,7 @@ export default defineConfig({
   ],
 
   schema: {
-    types: schemaTypes,
+    types: [project, client, siteSettings],
     templates: (templates) =>
       templates.filter(({ schemaType }) => !SINGLETON_TYPES.has(schemaType)),
   },
