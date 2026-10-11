@@ -148,6 +148,7 @@ export default function AboutPage() {
             <div className="pt-2 sm:pt-4 flex flex-wrap items-center justify-center gap-4">
               <Link
                 href="/projects"
+                title="Projelerimizi İncele"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#00F2FE] hover:bg-white text-slate-900 text-xs sm:text-sm font-bold transition-all duration-300 shadow-lg shadow-[#00F2FE]/20"
               >
                 <Rocket className="w-4 h-4" />

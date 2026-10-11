@@ -23,7 +23,11 @@ export async function Footer() {
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8 text-center md:text-left">
           <div className="col-span-2 md:col-span-1 flex flex-col items-center md:items-start">
-            <Link href="/" className="inline-block mb-3 group">
+            <Link
+              href="/"
+              title="Anasayfaya Dön"
+              className="inline-block mb-3 group"
+            >
               <Image
                 src="/arkunsoft.png"
                 alt="ArkunSoft Logo"
@@ -46,7 +50,7 @@ export async function Footer() {
                       key={uniqueKey}
                       href={link.url}
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel="nofollow noopener noreferrer"
                       aria-label={link.platform ?? "Sosyal Medya"}
                       className="p-2 text-slate-300 bg-white/5 hover:text-[#00F2FE] hover:bg-[#38A3E5]/20 rounded-xl border border-white/10 transition-all duration-200 hover:scale-110 active:scale-95 [&>svg]:w-4 [&>svg]:h-4"
                     >
@@ -59,13 +63,14 @@ export async function Footer() {
           </div>
 
           <div className="col-span-1 md:col-span-1 flex flex-col items-center md:items-start">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#38A3E5] mb-3">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-[#38A3E5] mb-3">
               Menü
-            </h4>
+            </h3>
             <ul className="space-y-1 text-xs text-slate-300">
               <li>
                 <Link
                   href="/"
+                  title="Anasayfaya Dön"
                   className="-mx-2 inline-block px-2 py-1 rounded-md border border-transparent hover:border-[#38A3E5]/30 hover:bg-[#38A3E5]/15 hover:text-white transition-all duration-200 hover:translate-x-1"
                 >
                   Anasayfa
@@ -74,6 +79,7 @@ export async function Footer() {
               <li>
                 <Link
                   href="/projects"
+                  title="Projeleri İncele"
                   className="-mx-2 inline-block px-2 py-1 rounded-md border border-transparent hover:border-[#38A3E5]/30 hover:bg-[#38A3E5]/15 hover:text-white transition-all duration-200 hover:translate-x-1"
                 >
                   Projeler
@@ -82,6 +88,7 @@ export async function Footer() {
               <li>
                 <Link
                   href="/about"
+                  title="Hakkımızda"
                   className="-mx-2 inline-block px-2 py-1 rounded-md border border-transparent hover:border-[#38A3E5]/30 hover:bg-[#38A3E5]/15 hover:text-white transition-all duration-200 hover:translate-x-1"
                 >
                   Hakkımızda
@@ -90,6 +97,7 @@ export async function Footer() {
               <li>
                 <Link
                   href="/contact"
+                  title="İletişime Geç"
                   className="-mx-2 inline-block px-2 py-1 rounded-md border border-transparent hover:border-[#38A3E5]/30 hover:bg-[#38A3E5]/15 hover:text-white transition-all duration-200 hover:translate-x-1"
                 >
                   İletişim
@@ -99,13 +107,14 @@ export async function Footer() {
           </div>
 
           <div className="col-span-1 md:col-span-1 flex flex-col items-center md:items-start">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#38A3E5] mb-3">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-[#38A3E5] mb-3">
               Yasal
-            </h4>
+            </h3>
             <ul className="space-y-1 text-xs text-slate-300">
               <li>
                 <Link
                   href="/privacy"
+                  title="Gizlilik Politikasını İncele"
                   className="-mx-2 inline-block px-2 py-1 rounded-md border border-transparent hover:border-[#38A3E5]/30 hover:bg-[#38A3E5]/15 hover:text-white transition-all duration-200 hover:translate-x-1"
                 >
                   Gizlilik Politikası
@@ -114,6 +123,7 @@ export async function Footer() {
               <li>
                 <Link
                   href="/terms"
+                  title="Kullanım Koşullarını İncele"
                   className="-mx-2 inline-block px-2 py-1 rounded-md border border-transparent hover:border-[#38A3E5]/30 hover:bg-[#38A3E5]/15 hover:text-white transition-all duration-200 hover:translate-x-1"
                 >
                   Kullanım Koşulları
@@ -123,9 +133,9 @@ export async function Footer() {
           </div>
 
           <div className="col-span-2 md:col-span-1 flex flex-col items-center md:items-start">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#38A3E5] mb-3">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-[#38A3E5] mb-3">
               İletişim
-            </h4>
+            </h3>
             <ul className="space-y-1 text-xs text-slate-300">
               {settings?.address && (
                 <li className="py-1 text-slate-300/80 leading-snug">
@@ -167,7 +177,7 @@ export async function Footer() {
               <a
                 href="https://github.com/okanbatuk"
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="nofollow noopener noreferrer"
                 className="px-2 py-0.5 rounded-md font-semibold text-slate-200 bg-white/5 border border-white/10 hover:border-[#38A3E5]/50 hover:bg-[#38A3E5]/20 hover:text-white transition-all duration-200"
               >
                 myrn

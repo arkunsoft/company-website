@@ -222,6 +222,7 @@ export function AboutContactCard() {
           <div className="pt-2 w-full sm:w-auto">
             <Link
               href="/contact"
+              title="Bize Ulaşın"
               className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#0F3866] hover:bg-[#38A3E5] text-white text-xs sm:text-sm font-bold transition-all duration-300 shadow-lg shadow-[#0F3866]/20 group/btn"
             >
               <span>Bize Ulaşın</span>

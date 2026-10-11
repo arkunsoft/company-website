@@ -158,7 +158,7 @@ export function Header({ settings }: HeaderProps) {
                       key={uniqueKey}
                       href={link.url}
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel="nofollow noopener noreferrer"
                       aria-label={link.platform ?? "Sosyal Medya"}
                       className="p-2.5 text-slate-100 hover:text-amber-300 hover:bg-amber-400/20 rounded-xl border border-transparent hover:border-amber-400/40 transition-all duration-200 hover:scale-110 active:scale-95 [&>svg]:w-5 [&>svg]:h-5"
                     >
@@ -283,7 +283,7 @@ export function Header({ settings }: HeaderProps) {
                       key={uniqueKey}
                       href={link.url}
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel="nofollow noopener noreferrer"
                       aria-label={link.platform ?? "Sosyal Medya"}
                       className="p-2.5 text-slate-100 bg-white/5 hover:text-amber-300 hover:bg-amber-400/20 rounded-xl border border-white/10 transition-all duration-200 active:scale-95 [&>svg]:w-5 [&>svg]:h-5"
                     >

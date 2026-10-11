@@ -125,6 +125,7 @@ export default async function ProjectDetailPage({
               >
                 <Link
                   href="/projects"
+                  title="Tüm Projelere Dön"
                   className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-200 hover:text-[#00F2FE] transition-colors mb-1 sm:mb-2"
                 >
                   <ArrowLeft className="w-4 h-4" />

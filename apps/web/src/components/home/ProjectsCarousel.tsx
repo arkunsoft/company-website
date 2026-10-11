@@ -121,6 +121,7 @@ export function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
                   {project.slug && (
                     <Link
                       href={`/projects/${project.slug}`}
+                      title={project.title || "Proje Detayları"}
                       className="absolute inset-0 z-20"
                       aria-label={project.title || "Proje Detayı"}
                     />

@@ -3,43 +3,34 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import { sanityFetch } from "@/lib/sanity/fetch";
 import { SITE_SETTINGS_QUERY } from "@/lib/sanity/queries";
 import type { SITE_SETTINGS_QUERY_RESULT } from "@/lib/sanity/sanity.types";
-import { ScrollToTop } from "@/components/ui/scroll-to-top";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://arkunsoft.com"),
   title: {
-    default: "ArkunSoft | Geleceğin Dijital Sistemleri",
+    default: "ArkunSoft | Geleceğin Dijital Sistemleri & Yazılım Çözümleri",
     template: "%s | ArkunSoft",
   },
   description:
-    "Yüksek performanslı, güvenli ve modern web, mobil ve yapay zeka çözümleri ile kurumsal süreçlerinizi uçtan uca dijitalleştiriyoruz.",
-  keywords: [
-    "ArkunSoft",
-    "Yazılım Şirketi",
-    "Özel Yazılım Geliştirme",
-    "Web ve Mobil Uygulama",
-    "Yapay Zeka Çözümleri",
-    "Next.js ve React Native",
-  ],
+    "ArkunSoft olarak yüksek performanslı, güvenli, modern web, mobil ve yapay zeka çözümleri ile kurumsal süreçlerinizi dijitalleştiriyoruz. Bilgi için tıklayın.",
   authors: [{ name: "ArkunSoft" }],
   creator: "ArkunSoft",
   publisher: "ArkunSoft",
   icons: {
-    icon: "/favicon-v2.ico",
-    shortcut: "/favicon-v2.ico",
-    apple: "/apple-icon.png",
+    icon: [{ url: "/favicon-v2.ico", sizes: "any" }],
+    apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
   },
   openGraph: {
     type: "website",
     locale: "tr_TR",
     url: "https://arkunsoft.com",
     siteName: "ArkunSoft",
-    title: "ArkunSoft | Geleceğin Dijital Sistemleri",
+    title: "ArkunSoft | Geleceğin Dijital Sistemleri & Yazılım Çözümleri",
     description:
-      "Yüksek performanslı, güvenli ve modern web, mobil ve yapay zeka çözümleri ile kurumsal süreçlerinizi uçtan uca dijitalleştiriyoruz.",
+      "ArkunSoft olarak yüksek performanslı, güvenli, modern web, mobil ve yapay zeka çözümleri ile kurumsal süreçlerinizi dijitalleştiriyoruz. Bilgi için tıklayın.",
     images: [
       {
         url: "/arkunsoft.png",
@@ -51,9 +42,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ArkunSoft | Geleceğin Dijital Sistemleri",
+    title: "ArkunSoft | Geleceğin Dijital Sistemleri & Yazılım Çözümleri",
     description:
-      "Yüksek performanslı, güvenli ve modern web, mobil ve yapay zeka çözümleri ile kurumsal süreçlerinizi uçtan uca dijitalleştiriyoruz.",
+      "ArkunSoft olarak yüksek performanslı, güvenli, modern web, mobil ve yapay zeka çözümleri ile kurumsal süreçlerinizi dijitalleştiriyoruz. Bilgi için tıklayın.",
     images: ["/arkunsoft.png"],
   },
   robots: {
@@ -98,11 +89,33 @@ export default async function RootLayout({
     query: SITE_SETTINGS_QUERY,
   });
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "ArkunSoft",
+    url: "https://www.arkunsoft.com",
+    logo: "https://www.arkunsoft.com/arkunsoft.png",
+    description:
+      "Yüksek performanslı, güvenli ve modern web, mobil ve yapay zeka çözümleri ile kurumsal süreçlerinizi uçtan uca dijitalleştiriyoruz.",
+    sameAs: [
+      "https://www.instagram.com/arkunsoft",
+      "https://www.linkedin.com/company/arkunsoft",
+      "https://github.com/arkunsoft",
+    ],
+  };
+
   return (
     <html
       lang="tr"
       className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased no-scrollbar`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD structured data is safe
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         <Header settings={settings} />
         <main className="flex-1">{children}</main>

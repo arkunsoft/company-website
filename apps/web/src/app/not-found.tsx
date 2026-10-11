@@ -31,6 +31,7 @@ export default function NotFound() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
           <Link
             href="/"
+            title="Anasayfaya Dön"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#00F2FE] hover:bg-white text-slate-900 text-xs sm:text-sm font-bold transition-all duration-300 shadow-lg shadow-[#00F2FE]/20"
           >
             <Home className="w-4 h-4" />
@@ -39,6 +40,7 @@ export default function NotFound() {
 
           <Link
             href="/projects"
+            title="Projelere Göz At"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/15 text-xs sm:text-sm font-semibold backdrop-blur-md transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />

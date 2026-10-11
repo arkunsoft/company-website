@@ -25,14 +25,14 @@ import type {
 
 export const metadata: Metadata = {
   description:
-    "Yüksek performanslı, güvenli ve modern web platformları ile kurumsal süreçlerinizi uçtan uca dijitalleştiriyoruz.",
+    "ArkunSoft olarak yüksek performanslı, güvenli, modern web, mobil ve yapay zeka çözümleri ile kurumsal süreçlerinizi dijitalleştiriyoruz. Bilgi için tıklayın.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "ArkunSoft | Geleceğin Dijital Sistemleri",
+    title: "ArkunSoft | Geleceğin Dijital Sistemleri & Yazılım Çözümleri",
     description:
-      "Yüksek performanslı, güvenli ve modern web platformları ile kurumsal süreçlerinizi uçtan uca dijitalleştiriyoruz.",
+      "ArkunSoft olarak yüksek performanslı, güvenli, modern web, mobil ve yapay zeka çözümleri ile kurumsal süreçlerinizi dijitalleştiriyoruz. Bilgi için tıklayın.",
     images: [
       {
         url: "/arkunsoft.png",
