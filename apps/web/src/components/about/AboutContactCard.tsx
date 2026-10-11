@@ -26,9 +26,9 @@ export function AboutContactCard() {
       onMouseLeave={() => setIsHovered(false)}
       onFocus={() => setIsHovered(true)}
       onBlur={() => setIsHovered(false)}
-      className="p-8 sm:p-12 bg-white rounded-3xl border border-slate-200/90 shadow-xl shadow-slate-200/60 relative overflow-hidden group transition-all duration-500 outline-none"
+      className="p-6 sm:p-12 bg-white rounded-3xl border border-slate-200/90 shadow-xl shadow-slate-200/60 relative overflow-hidden group transition-all duration-500 outline-none"
     >
-      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden hidden lg:block">
         <svg
           className="w-full h-full"
           viewBox="0 0 1000 400"
@@ -42,8 +42,8 @@ export function AboutContactCard() {
               viewBox="0 0 10 10"
               refX="5"
               refY="5"
-              markerWidth="6"
-              markerHeight="6"
+              markerWidth="5"
+              markerHeight="5"
               orient="auto-start-reverse"
             >
               <path d="M 0 0 L 10 5 L 0 10 z" fill="#00F2FE" />
@@ -57,7 +57,7 @@ export function AboutContactCard() {
               y2="0%"
             >
               <stop offset="0%" stopColor="#1E56A0" stopOpacity="0.2" />
-              <stop offset="50%" stopColor="#38A3E5" stopOpacity="0.9" />
+              <stop offset="50%" stopColor="#38A3E5" stopOpacity="0.8" />
               <stop offset="100%" stopColor="#00F2FE" stopOpacity="1" />
             </linearGradient>
           </defs>
@@ -68,10 +68,10 @@ export function AboutContactCard() {
               d={path.d}
               fill="none"
               stroke="#38A3E5"
-              strokeWidth="3"
-              strokeDasharray="6 8"
-              initial={{ opacity: 0.1 }}
-              animate={{ opacity: isHovered ? 0.35 : 0.1 }}
+              strokeWidth="1.5"
+              strokeDasharray="4 6"
+              initial={{ opacity: 0.08 }}
+              animate={{ opacity: isHovered ? 0.3 : 0.08 }}
               transition={{ duration: 0.4 }}
             />
           ))}
@@ -82,20 +82,20 @@ export function AboutContactCard() {
               d={path.d}
               fill="none"
               stroke="#00F2FE"
-              strokeWidth="3"
-              strokeDasharray="140 300"
-              style={{ filter: "blur(4px)" }}
+              strokeWidth="1.5"
+              strokeDasharray="100 250"
+              style={{ filter: "blur(3px)" }}
               initial={{ strokeDashoffset: 440, opacity: 0 }}
               animate={
                 isHovered
-                  ? { strokeDashoffset: [440, 0], opacity: [0, 0.6, 0.6, 0] }
+                  ? { strokeDashoffset: [440, 0], opacity: [0, 0.5, 0.5, 0] }
                   : { strokeDashoffset: 440, opacity: 0 }
               }
               transition={
                 isHovered
                   ? {
                       repeat: Number.POSITIVE_INFINITY,
-                      duration: 1.6,
+                      duration: 1.8,
                       ease: "easeInOut",
                       delay: path.delay,
                     }
@@ -110,20 +110,20 @@ export function AboutContactCard() {
               d={path.d}
               fill="none"
               stroke="url(#card-vector-grad)"
-              strokeWidth="3"
+              strokeWidth="1.5"
               markerEnd="url(#card-arrowhead)"
-              strokeDasharray="120 320"
+              strokeDasharray="90 280"
               initial={{ strokeDashoffset: 440, opacity: 0 }}
               animate={
                 isHovered
-                  ? { strokeDashoffset: [440, 0], opacity: [0, 1, 1, 0] }
+                  ? { strokeDashoffset: [440, 0], opacity: [0, 0.9, 0.9, 0] }
                   : { strokeDashoffset: 440, opacity: 0 }
               }
               transition={
                 isHovered
                   ? {
                       repeat: Number.POSITIVE_INFINITY,
-                      duration: 1.6,
+                      duration: 1.8,
                       ease: "easeInOut",
                       delay: path.delay,
                     }
@@ -138,18 +138,18 @@ export function AboutContactCard() {
             r="115"
             fill="none"
             stroke="#38A3E5"
-            strokeWidth="3"
-            strokeDasharray="40 80"
-            initial={{ opacity: 0.1, rotate: 0 }}
+            strokeWidth="1.5"
+            strokeDasharray="30 60"
+            initial={{ opacity: 0.08, rotate: 0 }}
             animate={
               isHovered
-                ? { rotate: 360, opacity: 0.7 }
-                : { rotate: 0, opacity: 0.1 }
+                ? { rotate: 360, opacity: 0.5 }
+                : { rotate: 0, opacity: 0.08 }
             }
             transition={{
               rotate: {
                 repeat: Number.POSITIVE_INFINITY,
-                duration: 5,
+                duration: 6,
                 ease: "linear",
               },
               opacity: { duration: 0.3 },
@@ -163,18 +163,18 @@ export function AboutContactCard() {
             r="135"
             fill="none"
             stroke="#00F2FE"
-            strokeWidth="3"
-            strokeDasharray="20 70"
+            strokeWidth="1.5"
+            strokeDasharray="15 50"
             initial={{ opacity: 0, rotate: 0 }}
             animate={
               isHovered
-                ? { rotate: -360, opacity: 0.5 }
+                ? { rotate: -360, opacity: 0.4 }
                 : { rotate: 0, opacity: 0 }
             }
             transition={{
               rotate: {
                 repeat: Number.POSITIVE_INFINITY,
-                duration: 7,
+                duration: 8,
                 ease: "linear",
               },
               opacity: { duration: 0.3 },
@@ -186,18 +186,18 @@ export function AboutContactCard() {
 
       <div className="absolute top-1/2 -right-20 -translate-y-1/2 w-96 h-96 bg-[#38A3E5]/15 blur-3xl rounded-full pointer-events-none" />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-        <div className="lg:col-span-7 space-y-4 text-left">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center relative z-10">
+        <div className="lg:col-span-7 space-y-3 sm:space-y-4 text-center lg:text-left flex flex-col items-center lg:items-start">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-[#38A3E5] bg-[#38A3E5]/10 border border-[#38A3E5]/20">
             <MessageSquare className="w-3.5 h-3.5 text-[#38A3E5]" />
             <span>BİZİMLE İLETİŞİME GEÇİN</span>
           </span>
 
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-[#0F3866] tracking-tight">
+          <h3 className="text-xl sm:text-3xl font-extrabold text-[#0F3866] tracking-tight">
             Projenizi Birlikte Hayata Geçirelim
           </h3>
 
-          <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-xl">
+          <p className="text-slate-600 text-xs sm:text-base leading-relaxed max-w-xl">
             Yapay zeka, web, mobil veya altyapı ihtiyaçlarınız için mühendislik
             odaklı çözümler sunmaya hazırız. İhtiyaçlarınızı konuşmak için
             doğrudan iletişime geçebilirsiniz.
@@ -216,7 +216,7 @@ export function AboutContactCard() {
 
         <div className="lg:col-span-5 flex items-center justify-center">
           <div
-            className={`relative w-full max-w-xs aspect-16/10 bg-linear-to-br from-white to-slate-100 border rounded-2xl p-6 flex items-center justify-center shadow-md transition-all duration-500 backdrop-blur-xs ${
+            className={`relative w-full max-w-55 sm:max-w-xs aspect-16/10 bg-linear-to-br from-white to-slate-100 border rounded-2xl p-4 sm:p-6 flex items-center justify-center shadow-md transition-all duration-500 backdrop-blur-xs mx-auto ${
               isHovered
                 ? "border-[#00F2FE] shadow-2xl shadow-[#38A3E5]/30 scale-[1.04]"
                 : "border-slate-200"
@@ -227,7 +227,7 @@ export function AboutContactCard() {
               alt="ArkunSoft Logo"
               width={240}
               height={80}
-              className="w-full h-auto object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-500"
+              className="w-32 sm:w-full h-auto object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-500"
             />
           </div>
         </div>

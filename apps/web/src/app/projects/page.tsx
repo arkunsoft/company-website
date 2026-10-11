@@ -41,22 +41,24 @@ export default async function ProjectsPage() {
 
         <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 text-center md:text-left">
-            <div className="space-y-3 max-w-2xl mx-auto md:mx-0 flex flex-col items-center md:items-start">
-              <div className="inline-flex items-center gap-2 py-1 px-3.5 rounded-full text-xs font-semibold bg-white/15 text-white border border-white/20 backdrop-blur-md">
-                <Layers className="w-3.5 h-3.5 text-[#00F2FE]" />
-                <span>Portfolyo & Vaka Analizleri</span>
+            <InView>
+              <div className="space-y-3 max-w-2xl mx-auto md:mx-0 flex flex-col items-center md:items-start">
+                <div className="inline-flex items-center gap-2 py-1 px-3.5 rounded-full text-xs font-semibold bg-white/15 text-white border border-white/20 backdrop-blur-md">
+                  <Layers className="w-3.5 h-3.5 text-[#00F2FE]" />
+                  <span>Portfolyo & Vaka Analizleri</span>
+                </div>
+
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
+                  Geliştirdiğimiz Projeler
+                </h1>
+
+                <p className="text-blue-100 text-sm sm:text-base leading-relaxed font-normal">
+                  Modern teknolojilerle sıfırdan kurguladığımız, modern
+                  altyapılara sahip ve iş süreçlerine doğrudan değer katan
+                  dijital dönüşüm projelerimiz.
+                </p>
               </div>
-
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
-                Geliştirdiğimiz Projeler
-              </h1>
-
-              <p className="text-blue-100 text-sm sm:text-base leading-relaxed font-normal">
-                Modern teknolojilerle sıfırdan kurguladığımız, modern
-                altyapılara sahip ve iş süreçlerine doğrudan değer katan dijital
-                dönüşüm projelerimiz.
-              </p>
-            </div>
+            </InView>
 
             <div className="shrink-0 flex justify-center">
               <InView delay={300}>

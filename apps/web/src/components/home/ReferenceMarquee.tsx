@@ -15,7 +15,7 @@ export function ReferenceMarquee({ clients }: ReferenceMarqueeProps) {
     return null;
   }
 
-  const duplicatedClients = [...clients, ...clients, ...clients, ...clients];
+  const duplicatedClients = [...clients, ...clients];
 
   return (
     <section
@@ -36,8 +36,8 @@ export function ReferenceMarquee({ clients }: ReferenceMarqueeProps) {
 
       <InView delay={500}>
         <div className="relative w-full overflow-hidden flex items-center">
-          <div className="absolute left-0 top-0 bottom-0 w-16 bg-linear-to-r from-white to-transparent z-20 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 bg-linear-to-l from-white to-transparent z-20 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-linear-to-r from-white to-transparent z-20 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-linear-to-l from-white to-transparent z-20 pointer-events-none" />
 
           <div className="flex lg:hidden overflow-x-auto snap-x snap-mandatory gap-4 px-6 w-full scrollbar-none [-ms-overflow-style:none] pb-4">
             {clients.map((client, idx) => (
@@ -87,6 +87,7 @@ export function ReferenceMarquee({ clients }: ReferenceMarqueeProps) {
                       fill
                       sizes="128px"
                       priority={idx < 3}
+                      className="object-contain"
                     />
                   ) : (
                     <span className="text-sm font-bold text-slate-700 group-hover:text-[#1B75BC] transition-colors">

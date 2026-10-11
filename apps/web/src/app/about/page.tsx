@@ -105,14 +105,14 @@ const milestones = [
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-slate-50 overflow-x-hidden">
-      <section className="relative min-h-svh flex flex-col justify-center pt-32 pb-20 bg-linear-to-b from-[#1E56A0] via-[#16417C] to-[#0D2B52] border-b border-white/15 overflow-hidden select-none">
+      <section className="relative min-h-svh flex flex-col justify-center pt-24 pb-12 sm:pt-32 sm:pb-20 bg-linear-to-b from-[#1E56A0] via-[#16417C] to-[#0D2B52] border-b border-white/15 overflow-hidden select-none">
         <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-162.5 h-65 bg-[#38A3E5]/20 blur-3xl rounded-full pointer-events-none" />
         <div className="absolute top-0 right-10 w-96 h-96 bg-[#00F2FE]/15 blur-3xl rounded-full pointer-events-none" />
 
         <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 relative z-10 my-auto">
           <InView
             delay={100}
-            className="flex flex-col items-center text-center space-y-6 max-w-3xl mx-auto"
+            className="flex flex-col items-center text-center space-y-5 sm:space-y-6 max-w-3xl mx-auto"
           >
             <span className="inline-flex items-center gap-1.5 py-1 px-3.5 rounded-full text-xs font-semibold bg-[#00F2FE]/15 text-[#00F2FE] border border-[#00F2FE]/30 backdrop-blur-md">
               <Bot className="w-3.5 h-3.5 text-[#00F2FE]" />
@@ -124,13 +124,13 @@ export default function AboutPage() {
               <span className="text-[#00F2FE]">Mühendislik Yaklaşımı</span>
             </h1>
 
-            <p className="text-blue-100 text-sm sm:text-base leading-relaxed font-normal">
+            <p className="text-blue-100 text-xs sm:text-base leading-relaxed font-normal">
               ArkunSoft; akıllı yapay zeka entegrasyonları, kesintisiz otomasyon
               süreçleri ve ölçeklenebilir altyapılarla işletmenizi geleceğin
               dijital dünyasına taşır.
             </p>
 
-            <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
+            <div className="pt-2 sm:pt-4 flex flex-wrap items-center justify-center gap-4">
               <Link
                 href="/projects"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#00F2FE] hover:bg-white text-slate-900 text-xs sm:text-sm font-bold transition-all duration-300 shadow-lg shadow-[#00F2FE]/20"
@@ -143,7 +143,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-white relative overflow-hidden select-none">
+      <section className="py-16 sm:py-24 bg-white relative overflow-hidden select-none">
         <div
           className="absolute inset-0 opacity-[0.10] pointer-events-none z-0"
           style={{
@@ -153,7 +153,7 @@ export default function AboutPage() {
           }}
         />
 
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 relative z-10 space-y-12 sm:space-y-16">
           <InView
             delay={150}
             className="text-center space-y-3 max-w-2xl mx-auto"
@@ -162,22 +162,22 @@ export default function AboutPage() {
               <Compass className="w-3.5 h-3.5 text-[#38A3E5]" />
               <span>PUSULAMIZ</span>
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F3866] tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-[#0F3866] tracking-tight">
               Misyon & Vizyon
             </h2>
           </InView>
 
           <InView delay={200}>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
-              <div className="p-8 sm:p-10 rounded-3xl bg-white border border-slate-200/90 shadow-xl shadow-slate-100 flex flex-col justify-between space-y-6 hover:border-[#38A3E5] transition-all duration-300">
+              <div className="p-6 sm:p-10 rounded-3xl bg-white border border-slate-200/90 shadow-xl shadow-slate-100 flex flex-col justify-between space-y-6 hover:border-[#38A3E5] transition-all duration-300">
                 <div className="space-y-4">
                   <div className="w-12 h-12 rounded-2xl bg-[#0F3866] text-white flex items-center justify-center shadow-md">
                     <Target className="w-6 h-6" />
                   </div>
-                  <h3 className="text-2xl font-bold text-[#0F3866]">
+                  <h3 className="text-xl sm:text-2xl font-bold text-[#0F3866]">
                     Misyonumuz
                   </h3>
-                  <p className="text-slate-600 leading-relaxed text-sm sm:text-base">
+                  <p className="text-slate-600 leading-relaxed text-xs sm:text-base">
                     İşletmelerin dijital dönüşüm süreçlerini; akıllı
                     otomasyonlar, güvenli altyapılar ve kesintisiz çalışma
                     prensibiyle en hızlı ve verimli şekilde hayata geçirmektir.
@@ -190,15 +190,15 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              <div className="p-8 sm:p-10 rounded-3xl bg-white border border-slate-200/90 shadow-xl shadow-slate-100 flex flex-col justify-between space-y-6 hover:border-[#38A3E5] transition-all duration-300">
+              <div className="p-6 sm:p-10 rounded-3xl bg-white border border-slate-200/90 shadow-xl shadow-slate-100 flex flex-col justify-between space-y-6 hover:border-[#38A3E5] transition-all duration-300">
                 <div className="space-y-4">
                   <div className="w-12 h-12 rounded-2xl bg-[#0F3866] text-white flex items-center justify-center shadow-md">
                     <Compass className="w-6 h-6" />
                   </div>
-                  <h3 className="text-2xl font-bold text-[#0F3866]">
+                  <h3 className="text-xl sm:text-2xl font-bold text-[#0F3866]">
                     Vizyonumuz
                   </h3>
-                  <p className="text-slate-600 leading-relaxed text-sm sm:text-base">
+                  <p className="text-slate-600 leading-relaxed text-xs sm:text-base">
                     Gelişmiş yapay zeka teknolojilerini web ve mobil
                     platformlarda en doğru mimariyle buluşturarak, global
                     standartlarda güven duyulan bir teknoloji ortağı olmaktır.
@@ -215,7 +215,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="relative py-28 px-4 sm:px-6 lg:px-8 bg-[#071D38] text-white overflow-hidden">
+      <section className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#071D38] text-white overflow-hidden">
         <div
           className="absolute inset-0 bg-linear-to-b from-[#0A2545] to-[#0F3866] pointer-events-none z-0 hidden lg:block"
           style={{
@@ -229,7 +229,7 @@ export default function AboutPage() {
 
         <div className="absolute inset-0 bg-[radial-gradient(#38A3E5_1px,transparent_1px)] bg-size-[24px_24px] opacity-15 pointer-events-none lg:hidden" />
 
-        <div className="mx-auto max-w-6xl relative z-10 space-y-16">
+        <div className="mx-auto max-w-6xl relative z-10 space-y-12 sm:space-y-16">
           <InView
             delay={250}
             className="text-center space-y-3 max-w-2xl mx-auto"
@@ -239,10 +239,10 @@ export default function AboutPage() {
               <span>ODAK ALANLARIMIZ</span>
             </span>
 
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
               Uzmanlık Alanlarımız
             </h2>
-            <p className="text-blue-100/80 text-sm sm:text-base">
+            <p className="text-blue-100/80 text-xs sm:text-base">
               Yazılım, yapay zeka ve sistem mimarisi dikeyinde sunduğumuz temel
               yetkinlikler.
             </p>
@@ -274,8 +274,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-50">
-        <div className="mx-auto max-w-6xl space-y-20">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-slate-50">
+        <div className="mx-auto max-w-6xl space-y-16 sm:space-y-20">
           <InView delay={350} className="space-y-10">
             <div className="text-center space-y-3 max-w-2xl mx-auto">
               <span className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider text-[#38A3E5]">
