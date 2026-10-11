@@ -14,7 +14,6 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <main className="min-h-screen bg-slate-50 overflow-x-hidden">
-      {/* Hero Section */}
       <section className="relative pt-32 pb-16 bg-linear-to-b from-[#1E56A0] via-[#16417C] to-[#0D2B52] border-b border-white/15 select-none">
         <div className="mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-4">
           <InView delay={100} className="space-y-4">
@@ -32,7 +31,6 @@ export default function TermsPage() {
         </div>
       </section>
 
-      {/* İçerik */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl bg-white p-8 sm:p-12 rounded-3xl border border-slate-200/90 shadow-xl shadow-slate-200/50 space-y-8 text-slate-700 text-sm leading-relaxed">
           <div className="space-y-3">

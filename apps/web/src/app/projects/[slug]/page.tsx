@@ -1,9 +1,12 @@
+// apps/web/src/app/projects/[slug]/page.tsx
 import { ArrowLeft, Cpu, ExternalLink, Layers, Sparkles } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ProjectCaseStudy } from "@/components/projects/ProjectCaseStudy";
-import { ProjectHeroGallery } from "@/components/projects/ProjectHeroGallery";
+import {
+  DynamicProjectCaseStudy,
+  DynamicProjectHeroGallery,
+} from "@/components/common/DynamicComponents";
 import { InView } from "@/components/ui/in-view";
 import { SectionIndicator } from "@/components/ui/SectionIndicator";
 import { sanityFetch } from "@/lib/sanity/fetch";
@@ -170,7 +173,7 @@ export default async function ProjectDetailPage({
 
             <div className="lg:col-span-5 flex justify-center items-center w-full">
               <InView delay={200} className="w-full flex justify-center">
-                <ProjectHeroGallery
+                <DynamicProjectHeroGallery
                   gallery={galleryList}
                   title={project.title ?? "Proje"}
                 />
@@ -222,7 +225,7 @@ export default async function ProjectDetailPage({
 
           {project.caseStudy && (
             <InView delay={400} className="w-full">
-              <ProjectCaseStudy
+              <DynamicProjectCaseStudy
                 caseStudy={project.caseStudy}
                 title={project.title ?? "Proje"}
                 coverImageUrl={

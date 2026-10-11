@@ -1,13 +1,16 @@
 import { Sparkles } from "lucide-react";
 import type { Metadata } from "next";
-import { ContactSection } from "@/components/home/ContactSection";
+import {
+  DynamicContactSection,
+  DynamicProjectsCarousel,
+  DynamicReferenceMarquee,
+  DynamicServicesSection,
+  DynamicStatsSection,
+  DynamicTechStackSection,
+} from "@/components/common/DynamicComponents";
 import { HeroBackground } from "@/components/home/HeroBackground";
-import { ProjectsCarousel } from "@/components/home/ProjectsCarousel";
-import { ReferenceMarquee } from "@/components/home/ReferenceMarquee";
-import { ServicesSection } from "@/components/home/ServicesSection";
-import { StatsSection } from "@/components/home/StatsSection";
-import { TechStackSection } from "@/components/home/TechStackSection";
 import { InView } from "@/components/ui/in-view";
+import { SectionIndicator } from "@/components/ui/SectionIndicator";
 import { sanityFetch } from "@/lib/sanity/fetch";
 import {
   ALL_CLIENTS_QUERY,
@@ -19,7 +22,6 @@ import type {
   ALL_PROJECTS_QUERY_RESULT,
   SITE_SETTINGS_QUERY_RESULT,
 } from "@/lib/sanity/sanity.types";
-import { SectionIndicator } from "@/components/ui/SectionIndicator";
 
 export const metadata: Metadata = {
   description:
@@ -92,22 +94,22 @@ export default async function HomePage() {
           </div>
         </InView>
       </section>
-      <ReferenceMarquee clients={clients} />
-      <StatsSection />
+      <DynamicReferenceMarquee clients={clients} />
+      <DynamicStatsSection />
 
       <section id="services">
-        <ServicesSection />
+        <DynamicServicesSection />
       </section>
       <section id="projects" className="scroll-mt-20 bg-slate-50">
         <InView delay={500}>
-          <ProjectsCarousel projects={projects} />
+          <DynamicProjectsCarousel projects={projects} />
         </InView>
       </section>
       <section id="tech">
-        <TechStackSection />
+        <DynamicTechStackSection />
       </section>
       <section id="contact" className="scroll-mt-20">
-        <ContactSection settings={settings} />
+        <DynamicContactSection settings={settings} />
       </section>
     </>
   );

@@ -1,3 +1,4 @@
+// apps/web/src/app/about/page.tsx
 import {
   Bot,
   BrainCircuit,
@@ -18,7 +19,7 @@ import {
 } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { AboutContactCard } from "@/components/about/AboutContactCard";
+import { DynamicAboutContactCard } from "@/components/common/DynamicComponents";
 import { InView } from "@/components/ui/in-view";
 import { SectionIndicator } from "@/components/ui/SectionIndicator";
 
@@ -370,7 +371,7 @@ export default function AboutPage() {
 
           <div id="contact">
             <InView delay={450}>
-              <AboutContactCard />
+              <DynamicAboutContactCard />
             </InView>
           </div>
         </div>

@@ -1,3 +1,4 @@
+// apps/web/src/app/contact/page.tsx
 import {
   Clock,
   Mail,
@@ -7,7 +8,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import type { Metadata } from "next";
-import { ContactForm } from "@/components/contact/ContactForm";
+import { DynamicContactForm } from "@/components/common/DynamicComponents";
 import { InView } from "@/components/ui/in-view";
 import { sanityFetch } from "@/lib/sanity/fetch";
 import { SITE_SETTINGS_QUERY } from "@/lib/sanity/queries";
@@ -165,7 +166,7 @@ export default async function ContactPage() {
                   </p>
                 </div>
 
-                <ContactForm />
+                <DynamicContactForm />
               </div>
             </InView>
           </div>

@@ -1,6 +1,7 @@
+// apps/web/src/app/projects/page.tsx
 import { FolderCheck, Grid, Layers } from "lucide-react";
 import type { Metadata } from "next";
-import { ProjectFilter } from "@/components/projects/ProjectFilter";
+import { DynamicProjectFilter } from "@/components/common/DynamicComponents";
 import { InView } from "@/components/ui/in-view";
 import { sanityFetch } from "@/lib/sanity/fetch";
 import { ALL_PROJECTS_QUERY } from "@/lib/sanity/queries";
@@ -102,7 +103,7 @@ export default async function ProjectsPage() {
             </p>
           </div>
 
-          <ProjectFilter projects={projects} />
+          <DynamicProjectFilter projects={projects} />
         </div>
       </section>
     </main>
