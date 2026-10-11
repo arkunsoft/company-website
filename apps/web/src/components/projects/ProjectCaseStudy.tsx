@@ -1,3 +1,4 @@
+// apps/web/src/components/projects/ProjectCaseStudy.tsx
 import {
   CheckCircle2,
   Cpu,
@@ -47,9 +48,9 @@ export function ProjectCaseStudy({
                 <HelpCircle className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="text-xs font-extrabold text-slate-900 uppercase tracking-wider">
+                <h3 className="text-xs font-extrabold text-slate-900 uppercase tracking-wider">
                   Mevcut Problem
-                </h4>
+                </h3>
                 <p className="text-xs text-slate-600 mt-1 leading-relaxed">
                   Geleneksel ve verimsiz iş akışları, manuel takip süreçleri.
                 </p>
@@ -61,9 +62,9 @@ export function ProjectCaseStudy({
                 <Lightbulb className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="text-xs font-extrabold text-slate-900 uppercase tracking-wider">
+                <h3 className="text-xs font-extrabold text-slate-900 uppercase tracking-wider">
                   Uygulanan Çözüm
-                </h4>
+                </h3>
                 <p className="text-xs text-slate-600 mt-1 leading-relaxed">
                   Ölçeklenebilir, yüksek performanslı ve modüler mimari.
                 </p>
@@ -75,9 +76,9 @@ export function ProjectCaseStudy({
                 <Rocket className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="text-xs font-extrabold text-slate-900 uppercase tracking-wider">
+                <h3 className="text-xs font-extrabold text-slate-900 uppercase tracking-wider">
                   Sonuç & Etki
-                </h4>
+                </h3>
                 <p className="text-xs text-slate-600 mt-1 leading-relaxed">
                   Operasyonel hız artışı, anlık veri akışı ve yüksek
                   erişilebilirlik.

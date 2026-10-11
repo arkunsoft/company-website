@@ -1,3 +1,4 @@
+// apps/web/src/components/home/ContactSection.tsx
 "use client";
 
 import { Mail, MapPin, MessageSquare, Phone, Send } from "lucide-react";
@@ -35,9 +36,9 @@ export function ContactSection({ settings }: ContactSectionProps) {
                   <MessageSquare className="w-4 h-4 text-[#38A3E5]" />
                   <span>İLETİŞİM</span>
                 </div>
-                <h3 className="text-3xl sm:text-4xl font-(family-name:--font-playfair) italic font-extrabold text-[#0F3866] mt-3 tracking-tight leading-tight">
+                <h2 className="text-3xl sm:text-4xl font-(family-name:--font-playfair) italic font-extrabold text-[#0F3866] mt-3 tracking-tight leading-tight">
                   Projenizi Birlikte Hayata Geçirelim..
-                </h3>
+                </h2>
                 <p className="text-slate-600 mt-4 text-sm sm:text-base leading-relaxed">
                   Dijital dönüşümünüzü başlatmak veya var olan sistemlerinizi
                   ölçeklendirmek için bizimle iletişime geçin.

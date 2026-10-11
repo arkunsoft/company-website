@@ -355,9 +355,9 @@ export default function AboutPage() {
                   >
                     <div className="flex items-center gap-2 text-[#00F2FE]">
                       <CheckCircle2 className="w-4 h-4 shrink-0" />
-                      <h4 className="font-bold text-sm text-white">
+                      <h3 className="font-bold text-sm text-white">
                         {item.title}
-                      </h4>
+                      </h3>
                     </div>
                     <p className="text-xs text-blue-100/80 leading-relaxed">
                       {item.desc}
