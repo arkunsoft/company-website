@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, MessageSquare } from "lucide-react";
+import { ArrowRight, MessageSquare, Sparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -188,10 +188,26 @@ export function AboutContactCard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center relative z-10">
         <div className="lg:col-span-7 space-y-3 sm:space-y-4 text-center lg:text-left flex flex-col items-center lg:items-start">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider text-[#38A3E5] bg-[#38A3E5]/10 border border-[#38A3E5]/20">
-            <MessageSquare className="w-3.5 h-3.5 text-[#38A3E5]" />
-            <span>BİZİMLE İLETİŞİME GEÇİN</span>
-          </span>
+          <div className="flex items-center justify-center lg:justify-start gap-2 w-full">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider text-[#1B75BC] bg-[#38A3E5]/10 border border-[#38A3E5]/20 shadow-xs">
+              <MessageSquare className="w-3.5 h-3.5 text-[#1B75BC]" />
+              <span>BİZİMLE İLETİŞİME GEÇİN</span>
+            </span>
+          </div>
+
+          <div className="w-full sm:max-w-md p-3 rounded-2xl bg-linear-to-r from-[#0F3866]/5 via-[#38A3E5]/10 to-[#0F3866]/5 border border-[#38A3E5]/20 flex items-center gap-3 text-left">
+            <div className="w-10 h-10 rounded-xl bg-[#0F3866] text-[#00F2FE] flex items-center justify-center shrink-0 shadow-sm">
+              <Sparkles className="w-5 h-5 animate-pulse" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-[11px] font-bold text-[#0F3866]">
+                Yeni Proje Başlangıcı
+              </span>
+              <span className="text-[10px] text-slate-500">
+                Fikirlerinizi uçtan uca mimariyle buluşturalım.
+              </span>
+            </div>
+          </div>
 
           <h3 className="text-xl sm:text-3xl font-extrabold text-[#0F3866] tracking-tight">
             Projenizi Birlikte Hayata Geçirelim
@@ -203,10 +219,10 @@ export function AboutContactCard() {
             doğrudan iletişime geçebilirsiniz.
           </p>
 
-          <div className="pt-2">
+          <div className="pt-2 w-full sm:w-auto">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-[#0F3866] hover:bg-[#38A3E5] text-white text-xs sm:text-sm font-bold transition-all duration-300 shadow-lg shadow-[#0F3866]/20 group/btn"
+              className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#0F3866] hover:bg-[#38A3E5] text-white text-xs sm:text-sm font-bold transition-all duration-300 shadow-lg shadow-[#0F3866]/20 group/btn"
             >
               <span>Bize Ulaşın</span>
               <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
@@ -214,9 +230,9 @@ export function AboutContactCard() {
           </div>
         </div>
 
-        <div className="lg:col-span-5 flex items-center justify-center">
+        <div className="hidden lg:col-span-5 lg:flex items-center justify-center">
           <div
-            className={`relative w-full max-w-55 sm:max-w-xs aspect-16/10 bg-linear-to-br from-white to-slate-100 border rounded-2xl p-4 sm:p-6 flex items-center justify-center shadow-md transition-all duration-500 backdrop-blur-xs mx-auto ${
+            className={`relative w-full max-w-xs aspect-16/10 bg-linear-to-br from-white to-slate-100 border rounded-2xl p-6 flex items-center justify-center shadow-md transition-all duration-500 backdrop-blur-xs mx-auto ${
               isHovered
                 ? "border-[#00F2FE] shadow-2xl shadow-[#38A3E5]/30 scale-[1.04]"
                 : "border-slate-200"
@@ -227,7 +243,7 @@ export function AboutContactCard() {
               alt="ArkunSoft Logo"
               width={240}
               height={80}
-              className="w-32 sm:w-full h-auto object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-500"
+              className="w-full h-auto object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-500"
             />
           </div>
         </div>
