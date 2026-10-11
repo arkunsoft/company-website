@@ -19,6 +19,7 @@ import type {
   ALL_PROJECTS_QUERY_RESULT,
   SITE_SETTINGS_QUERY_RESULT,
 } from "@/lib/sanity/sanity.types";
+import { SectionIndicator } from "@/components/ui/SectionIndicator";
 
 export const metadata: Metadata = {
   description:
@@ -41,6 +42,15 @@ export const metadata: Metadata = {
   },
 };
 
+const HOME_SECTIONS = [
+  { id: "hero", label: "Giriş" },
+  { id: "references", label: "Referanslar" },
+  { id: "services", label: "Çözümler" },
+  { id: "projects", label: "Projeler" },
+  { id: "tech", label: "Teknolojiler" },
+  { id: "contact", label: "İletişim" },
+];
+
 export default async function HomePage() {
   const [projects, clients, settings] = await Promise.all([
     sanityFetch<ALL_PROJECTS_QUERY_RESULT>({ query: ALL_PROJECTS_QUERY }),
@@ -50,7 +60,11 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="relative py-28 md:py-36 overflow-hidden border-b border-white/10 select-none">
+      <SectionIndicator sections={HOME_SECTIONS} />
+      <section
+        id="hero"
+        className="relative py-28 md:py-36 overflow-hidden border-b border-white/10 select-none"
+      >
         <HeroBackground />
 
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-60 bg-[#38A3E5]/20 blur-3xl rounded-full pointer-events-none" />
@@ -78,21 +92,20 @@ export default async function HomePage() {
           </div>
         </InView>
       </section>
-
       <ReferenceMarquee clients={clients} />
-
       <StatsSection />
 
-      <ServicesSection />
-
+      <section id="services">
+        <ServicesSection />
+      </section>
       <section id="projects" className="scroll-mt-20 bg-slate-50">
         <InView delay={500}>
           <ProjectsCarousel projects={projects} />
         </InView>
       </section>
-
-      <TechStackSection />
-
+      <section id="tech">
+        <TechStackSection />
+      </section>
       <section id="contact" className="scroll-mt-20">
         <ContactSection settings={settings} />
       </section>

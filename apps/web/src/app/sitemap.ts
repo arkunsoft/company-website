@@ -5,7 +5,6 @@ import { PROJECT_SLUGS_QUERY } from "@/lib/sanity/queries";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://arkunsoft.com";
 
-  // Statik Sayfalar
   const routes = [
     "",
     "/about",

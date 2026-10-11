@@ -20,6 +20,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { AboutContactCard } from "@/components/about/AboutContactCard";
 import { InView } from "@/components/ui/in-view";
+import { SectionIndicator } from "@/components/ui/SectionIndicator";
 
 export const metadata: Metadata = {
   title: "Hakkımızda | ArkunSoft",
@@ -102,10 +103,23 @@ const milestones = [
   },
 ];
 
+const ABOUT_SECTIONS = [
+  { id: "hero", label: "Giriş" },
+  { id: "mission-vision", label: "Misyon & Vizyon" },
+  { id: "capabilities", label: "Uzmanlık Alanları" },
+  { id: "principles", label: "Prensipler" },
+  { id: "contact", label: "İletişim" },
+];
+
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-slate-50 overflow-x-hidden">
-      <section className="relative min-h-svh flex flex-col justify-center pt-24 pb-12 sm:pt-32 sm:pb-20 bg-linear-to-b from-[#1E56A0] via-[#16417C] to-[#0D2B52] border-b border-white/15 overflow-hidden select-none">
+    <main className="min-h-screen bg-slate-50 overflow-x-hidden relative">
+      <SectionIndicator sections={ABOUT_SECTIONS} />
+
+      <section
+        id="hero"
+        className="relative min-h-svh flex flex-col justify-center pt-24 pb-12 sm:pt-32 sm:pb-20 bg-linear-to-b from-[#1E56A0] via-[#16417C] to-[#0D2B52] border-b border-white/15 overflow-hidden select-none"
+      >
         <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-162.5 h-65 bg-[#38A3E5]/20 blur-3xl rounded-full pointer-events-none" />
         <div className="absolute top-0 right-10 w-96 h-96 bg-[#00F2FE]/15 blur-3xl rounded-full pointer-events-none" />
 
@@ -143,7 +157,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-24 bg-white relative overflow-hidden select-none">
+      <section
+        id="mission-vision"
+        className="py-16 sm:py-24 bg-white relative overflow-hidden select-none"
+      >
         <div
           className="absolute inset-0 opacity-[0.10] pointer-events-none z-0"
           style={{
@@ -215,7 +232,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#071D38] text-white overflow-hidden">
+      <section
+        id="capabilities"
+        className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 bg-[#071D38] text-white overflow-hidden"
+      >
         <div
           className="absolute inset-0 bg-linear-to-b from-[#0A2545] to-[#0F3866] pointer-events-none z-0 hidden lg:block"
           style={{
@@ -274,7 +294,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-slate-50">
+      <section
+        id="principles"
+        className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-slate-50"
+      >
         <div className="mx-auto max-w-6xl space-y-16 sm:space-y-20">
           <InView delay={350} className="space-y-10">
             <div className="text-center space-y-3 max-w-2xl mx-auto">
@@ -345,9 +368,11 @@ export default function AboutPage() {
             </div>
           </InView>
 
-          <InView delay={450}>
-            <AboutContactCard />
-          </InView>
+          <div id="contact">
+            <InView delay={450}>
+              <AboutContactCard />
+            </InView>
+          </div>
         </div>
       </section>
     </main>
