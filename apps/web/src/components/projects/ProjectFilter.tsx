@@ -38,61 +38,62 @@ export function ProjectFilter({ projects }: ProjectFilterProps) {
   }, [activeIndustry, projects]);
 
   return (
-    <div className="space-y-10">
-      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-        <button
-          type="button"
-          onClick={() => setActiveIndustry("all")}
-          className={`relative flex items-center gap-2 px-4 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer select-none ${
-            activeIndustry === "all"
-              ? "bg-[#0F3866] text-white shadow-lg shadow-[#0F3866]/20 scale-105"
-              : "bg-white text-slate-600 hover:bg-slate-100 hover:text-[#0F3866] border border-slate-200/80"
-          }`}
-        >
-          <span>Tümü</span>
-          <span
-            className={`px-2 py-0.5 rounded-full text-[10px] font-bold transition-colors ${
+    <div className="space-y-8 sm:space-y-10">
+      <div className="w-full overflow-x-auto pb-2 scrollbar-none sm:overflow-visible">
+        <div className="flex items-center justify-start sm:justify-center gap-2 sm:gap-3 px-1 min-w-max sm:min-w-0 sm:flex-wrap">
+          <button
+            type="button"
+            onClick={() => setActiveIndustry("all")}
+            className={`relative flex items-center gap-2 px-4 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer select-none shrink-0 ${
               activeIndustry === "all"
-                ? "bg-[#38A3E5] text-white"
-                : "bg-slate-100 text-slate-500"
+                ? "bg-[#0F3866] text-white shadow-lg shadow-[#0F3866]/20 scale-105"
+                : "bg-white text-slate-600 hover:bg-slate-100 hover:text-[#0F3866] border border-slate-200/80"
             }`}
           >
-            {projects.length}
-          </span>
-        </button>
-
-        {industries.map((ind) => {
-          const isActive = activeIndustry === ind;
-          const count = industryCounts[ind] || 0;
-
-          return (
-            <button
-              key={ind}
-              type="button"
-              onClick={() => setActiveIndustry(ind)}
-              className={`relative flex items-center gap-2 px-4 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer select-none ${
-                isActive
-                  ? "bg-[#0F3866] text-white shadow-lg shadow-[#0F3866]/20 scale-105"
-                  : "bg-white text-slate-600 hover:bg-slate-100 hover:text-[#0F3866] border border-slate-200/80"
+            <span>Tümü</span>
+            <span
+              className={`px-2 py-0.5 rounded-full text-[10px] font-bold transition-colors ${
+                activeIndustry === "all"
+                  ? "bg-[#38A3E5] text-white"
+                  : "bg-slate-100 text-slate-500"
               }`}
             >
-              <span className="capitalize">{ind}</span>
-              <span
-                className={`px-2 py-0.5 rounded-full text-[10px] font-bold transition-colors ${
+              {projects.length}
+            </span>
+          </button>
+
+          {industries.map((ind) => {
+            const isActive = activeIndustry === ind;
+            const count = industryCounts[ind] || 0;
+
+            return (
+              <button
+                key={ind}
+                type="button"
+                onClick={() => setActiveIndustry(ind)}
+                className={`relative flex items-center gap-2 px-4 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer select-none shrink-0 ${
                   isActive
-                    ? "bg-[#38A3E5] text-white"
-                    : "bg-slate-100 text-slate-500"
+                    ? "bg-[#0F3866] text-white shadow-lg shadow-[#0F3866]/20 scale-105"
+                    : "bg-white text-slate-600 hover:bg-slate-100 hover:text-[#0F3866] border border-slate-200/80"
                 }`}
               >
-                {count}
-              </span>
-            </button>
-          );
-        })}
+                <span className="capitalize">{ind}</span>
+                <span
+                  className={`px-2 py-0.5 rounded-full text-[10px] font-bold transition-colors ${
+                    isActive
+                      ? "bg-[#38A3E5] text-white"
+                      : "bg-slate-100 text-slate-500"
+                  }`}
+                >
+                  {count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Dynamic Projects Grid (Son satırı ortalayan ve eşit boyutlu Flexbox yapısı) */}
-      <div className="flex flex-wrap justify-center gap-8 min-h-100">
+      <div className="flex flex-wrap justify-center gap-6 sm:gap-8 min-h-100">
         {filteredProjects.map((project, index) => {
           const coverUrl = project.coverImage
             ? urlFor(project.coverImage)
@@ -126,20 +127,18 @@ export function ProjectFilter({ projects }: ProjectFilterProps) {
                 )}
               </div>
 
-              {/* İçerik Alanı - h-full ve flex-col ile Eşit Yükseklik Hizalaması */}
-              <div className="p-6 flex flex-col flex-1 justify-between gap-6">
+              <div className="p-5 sm:p-6 flex flex-col flex-1 justify-between gap-6">
                 <div className="space-y-2">
-                  <h3 className="text-xl font-bold text-slate-900 group-hover:text-sky-600 transition-colors line-clamp-1">
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-sky-600 transition-colors line-clamp-1">
                     {project.title}
                   </h3>
                   {project.summary && (
-                    <p className="text-sm text-slate-600 line-clamp-2 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-slate-600 line-clamp-2 leading-relaxed">
                       {project.summary}
                     </p>
                   )}
                 </div>
 
-                {/* Teknolojiler & Ok İkonu - Her Zaman Alt Sınırda Hizalı */}
                 <div className="pt-4 border-t border-slate-100 flex items-center justify-between shrink-0">
                   <div className="flex flex-wrap gap-1.5 max-w-[80%]">
                     {project.techStack?.slice(0, 3).map((tech) => (

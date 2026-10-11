@@ -18,8 +18,9 @@ export async function Footer() {
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#38A3E5]/10 blur-3xl rounded-full pointer-events-none" />
 
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          <div className="md:col-span-1">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8 text-center md:text-left">
+          {/* Logo & Açıklama */}
+          <div className="col-span-2 md:col-span-1 flex flex-col items-center md:items-start">
             <Link href="/" className="inline-block mb-3 group">
               <Image
                 src="/arkunsoft.png"
@@ -29,12 +30,13 @@ export async function Footer() {
                 className="h-9 w-auto object-contain brightness-0 invert group-hover:scale-105 transition-transform duration-300"
               />
             </Link>
-            <p className="text-slate-300 text-xs leading-relaxed">
+            <p className="text-slate-300 text-xs leading-relaxed max-w-xs md:max-w-none">
               Ölçeklenebilir, modern ve yüksek performanslı yazılım çözümleri.
             </p>
           </div>
 
-          <div>
+          {/* Menü */}
+          <div className="col-span-1 md:col-span-1 flex flex-col items-center md:items-start">
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#38A3E5] mb-3">
               Menü
             </h4>
@@ -74,40 +76,8 @@ export async function Footer() {
             </ul>
           </div>
 
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#38A3E5] mb-3">
-              İletişim
-            </h4>
-            <ul className="space-y-1 text-xs text-slate-300">
-              {settings?.address && (
-                <li className="py-1 text-slate-300/80 leading-snug">
-                  {settings.address}
-                </li>
-              )}
-              {settings?.contactEmail && (
-                <li>
-                  <a
-                    href={`mailto:${settings.contactEmail}`}
-                    className="-mx-2 inline-block px-2 py-1 rounded-md border border-transparent hover:border-[#38A3E5]/30 hover:bg-[#38A3E5]/15 hover:text-white transition-all duration-200 hover:translate-x-1"
-                  >
-                    {settings.contactEmail}
-                  </a>
-                </li>
-              )}
-              {settings?.phone && (
-                <li>
-                  <a
-                    href={`tel:${settings.phone}`}
-                    className="-mx-2 inline-block px-2 py-1 rounded-md border border-transparent hover:border-[#38A3E5]/30 hover:bg-[#38A3E5]/15 hover:text-white transition-all duration-200 hover:translate-x-1"
-                  >
-                    {settings.phone}
-                  </a>
-                </li>
-              )}
-            </ul>
-          </div>
-
-          <div>
+          {/* Yasal */}
+          <div className="col-span-1 md:col-span-1 flex flex-col items-center md:items-start">
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#38A3E5] mb-3">
               Yasal
             </h4>
@@ -130,13 +100,47 @@ export async function Footer() {
               </li>
             </ul>
           </div>
+
+          {/* İletişim */}
+          <div className="col-span-2 md:col-span-1 flex flex-col items-center md:items-start">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#38A3E5] mb-3">
+              İletişim
+            </h4>
+            <ul className="space-y-1 text-xs text-slate-300">
+              {settings?.address && (
+                <li className="py-1 text-slate-300/80 leading-snug">
+                  {settings.address}
+                </li>
+              )}
+              {settings?.contactEmail && (
+                <li>
+                  <a
+                    href={`mailto:${settings.contactEmail}`}
+                    className="-mx-2 inline-block px-2 py-1 rounded-md border border-transparent hover:border-[#38A3E5]/30 hover:bg-[#38A3E5]/15 hover:text-white transition-all duration-200 hover:translate-x-1 break-all"
+                  >
+                    {settings.contactEmail}
+                  </a>
+                </li>
+              )}
+              {settings?.phone && (
+                <li>
+                  <a
+                    href={`tel:${settings.phone.replace(/\s+/g, "")}`}
+                    className="-mx-2 inline-block px-2 py-1 rounded-md border border-transparent hover:border-[#38A3E5]/30 hover:bg-[#38A3E5]/15 hover:text-white transition-all duration-200 hover:translate-x-1"
+                  >
+                    {settings.phone}
+                  </a>
+                </li>
+              )}
+            </ul>
+          </div>
         </div>
 
-        <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400">
+        <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400 text-center sm:text-left">
           <p>© {new Date().getFullYear()} ArkunSoft. Tüm hakları saklıdır.</p>
 
           <InView delay={500}>
-            <p className="flex items-center gap-1.5">
+            <p className="flex items-center justify-center gap-1.5">
               <span>Designed with</span>
               <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500 animate-pulse inline-block" />
               <span>by</span>
