@@ -3,6 +3,7 @@
 import { Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { getSocialIcon } from "@/lib/getSocialIcon";
 import { sanityFetch } from "@/lib/sanity/fetch";
 import { SITE_SETTINGS_QUERY } from "@/lib/sanity/queries";
 import type { SITE_SETTINGS_QUERY_RESULT } from "@/lib/sanity/sanity.types";
@@ -12,6 +13,8 @@ export async function Footer() {
   const settings = await sanityFetch<SITE_SETTINGS_QUERY_RESULT>({
     query: SITE_SETTINGS_QUERY,
   });
+
+  const socialLinks = settings?.socialLinks ?? [];
 
   return (
     <footer className="bg-[#0F3866] text-white pt-12 pb-6 border-t border-white/10 select-none relative overflow-hidden">
@@ -32,9 +35,29 @@ export async function Footer() {
             <p className="text-slate-300 text-xs leading-relaxed max-w-xs md:max-w-none">
               Ölçeklenebilir, modern ve yüksek performanslı yazılım çözümleri.
             </p>
+
+            {socialLinks.length > 0 && (
+              <div className="mt-4 flex items-center justify-center md:justify-start gap-2 flex-wrap">
+                {socialLinks.map((link, index) => {
+                  const uniqueKey =
+                    link.url || link.platform || `footer-social-${index}`;
+                  return (
+                    <a
+                      key={uniqueKey}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={link.platform ?? "Sosyal Medya"}
+                      className="p-2 text-slate-300 bg-white/5 hover:text-[#00F2FE] hover:bg-[#38A3E5]/20 rounded-xl border border-white/10 transition-all duration-200 hover:scale-110 active:scale-95 [&>svg]:w-4 [&>svg]:h-4"
+                    >
+                      {getSocialIcon(link.platform ?? "", link.url ?? "")}
+                    </a>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
-          {/* Menü */}
           <div className="col-span-1 md:col-span-1 flex flex-col items-center md:items-start">
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#38A3E5] mb-3">
               Menü
@@ -75,7 +98,6 @@ export async function Footer() {
             </ul>
           </div>
 
-          {/* Yasal */}
           <div className="col-span-1 md:col-span-1 flex flex-col items-center md:items-start">
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#38A3E5] mb-3">
               Yasal
@@ -100,7 +122,6 @@ export async function Footer() {
             </ul>
           </div>
 
-          {/* İletişim */}
           <div className="col-span-2 md:col-span-1 flex flex-col items-center md:items-start">
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#38A3E5] mb-3">
               İletişim

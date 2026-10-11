@@ -74,8 +74,8 @@ export function Header({ settings }: HeaderProps) {
       <nav
         className={`w-full max-w-7xl flex items-center justify-between px-6 py-3 rounded-2xl transition-all duration-300 border relative overflow-visible ${
           scrolled
-            ? "bg-[#0F3866]/85 backdrop-blur-md border-white/15 shadow-xl shadow-black/20"
-            : "bg-[#0F3866]/40 backdrop-blur-sm border-white/10"
+            ? "bg-[#0F3866]/90 backdrop-blur-xl border-white/20 shadow-2xl shadow-black/30"
+            : "bg-[#0F3866]/50 backdrop-blur-md border-white/10"
         }`}
       >
         <div className="relative group py-1 flex flex-col items-center justify-center">
@@ -130,14 +130,14 @@ export function Header({ settings }: HeaderProps) {
                         d={path}
                         fill="none"
                         stroke="#FBBF24"
-                        strokeWidth="2.5"
+                        strokeWidth="2"
                         strokeLinecap="round"
                         className="transition-[stroke-dashoffset] duration-500 ease-out [stroke-dasharray:200] [stroke-dashoffset:200] group-hover:[stroke-dashoffset:0]"
                       />
                       <circle
                         cx={targetX}
                         cy={targetY}
-                        r="4"
+                        r="3.5"
                         fill="#FBBF24"
                         className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 delay-300"
                       />
@@ -160,7 +160,7 @@ export function Header({ settings }: HeaderProps) {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={link.platform ?? "Sosyal Medya"}
-                      className="p-2.5 text-slate-100 hover:text-amber-300 hover:bg-amber-400/20 rounded-xl border border-transparent hover:border-amber-400/40 transition-all duration-200 hover:scale-110 active:scale-95 [&>svg]:w-6 [&>svg]:h-6"
+                      className="p-2.5 text-slate-100 hover:text-amber-300 hover:bg-amber-400/20 rounded-xl border border-transparent hover:border-amber-400/40 transition-all duration-200 hover:scale-110 active:scale-95 [&>svg]:w-5 [&>svg]:h-5"
                     >
                       {getSocialIcon(link.platform ?? "", link.url ?? "")}
                     </a>
@@ -210,14 +210,16 @@ export function Header({ settings }: HeaderProps) {
           onClick={() => setMobileMenuOpen((prev) => !prev)}
           aria-label={mobileMenuOpen ? "Menüyü Kapat" : "Menüyü Aç"}
           aria-expanded={mobileMenuOpen}
-          className="md:hidden p-2 rounded-xl text-slate-100 hover:bg-white/10 transition-colors focus:outline-none"
+          className="md:hidden p-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-100 hover:bg-white/15 transition-all duration-300 active:scale-90 focus:outline-none"
         >
           <svg
-            className="w-6 h-6 transition-transform duration-300"
+            className={`w-5 h-5 transition-transform duration-300 ease-in-out ${
+              mobileMenuOpen ? "rotate-90 scale-110" : "rotate-0 scale-100"
+            }`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            strokeWidth="2"
+            strokeWidth="2.5"
             role="img"
             aria-label={mobileMenuOpen ? "Kapat İkonu" : "Menü İkonu"}
           >
@@ -239,13 +241,13 @@ export function Header({ settings }: HeaderProps) {
         </button>
 
         <div
-          className={`absolute top-full left-0 right-0 mt-3 p-4 rounded-2xl bg-[#0F3866]/95 backdrop-blur-xl border border-white/15 shadow-2xl shadow-black/50 md:hidden flex flex-col gap-3 transition-all duration-300 origin-top ${
+          className={`absolute top-full left-0 right-0 mt-3 p-5 rounded-3xl bg-[#0F3866]/95 backdrop-blur-2xl border border-white/15 shadow-2xl shadow-black/70 md:hidden flex flex-col gap-4 transition-all duration-300 origin-top ${
             mobileMenuOpen
               ? "opacity-100 scale-y-100 translate-y-0 pointer-events-auto"
               : "opacity-0 scale-y-95 -translate-y-2 pointer-events-none"
           }`}
         >
-          <ul className="flex flex-col gap-1">
+          <ul className="flex flex-col gap-1.5">
             {NAV_ITEMS.map((item) => {
               const active = isActiveLink(item.href);
 
@@ -267,13 +269,39 @@ export function Header({ settings }: HeaderProps) {
             })}
           </ul>
 
-          <div className="pt-2 border-t border-white/10 flex flex-col gap-3">
+          {socialLinks.length > 0 && (
+            <div className="pt-3 border-t border-white/10 flex flex-col gap-2.5">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-blue-200/70 px-1">
+                Sosyal Medya
+              </span>
+              <div className="flex items-center gap-2 flex-wrap">
+                {socialLinks.map((link, index) => {
+                  const uniqueKey =
+                    link.url || link.platform || `mob-link-${index}`;
+                  return (
+                    <a
+                      key={uniqueKey}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={link.platform ?? "Sosyal Medya"}
+                      className="p-2.5 text-slate-100 bg-white/5 hover:text-amber-300 hover:bg-amber-400/20 rounded-xl border border-white/10 transition-all duration-200 active:scale-95 [&>svg]:w-5 [&>svg]:h-5"
+                    >
+                      {getSocialIcon(link.platform ?? "", link.url ?? "")}
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          <div className="pt-3 border-t border-white/10 flex flex-col gap-3">
             <Link
-              href="#contact"
+              href="/contact"
               onClick={() => setMobileMenuOpen(false)}
               className="w-full text-center px-5 py-3 text-sm font-bold rounded-xl bg-[#38A3E5] text-white hover:bg-[#38A3E5]/90 transition-all shadow-md shadow-[#38A3E5]/25 active:scale-95"
             >
-              Bize Uaşın..
+              Bize Ulaşın..
             </Link>
           </div>
         </div>
