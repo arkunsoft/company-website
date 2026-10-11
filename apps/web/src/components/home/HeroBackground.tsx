@@ -38,6 +38,8 @@ export function HeroBackground() {
     const mouse = { x: -9999, y: -9999 };
     let nodes: Node[] = [];
 
+    const grid = new Map<string, Node[]>();
+
     function resize() {
       const rect = canvas?.getBoundingClientRect();
       if (!rect || !canvas) return;
@@ -66,8 +68,8 @@ export function HeroBackground() {
       mouse.y = -9999;
     }
 
-    function buildGrid(): Map<string, Node[]> {
-      const grid = new Map<string, Node[]>();
+    function updateGrid() {
+      grid.clear();
       for (const node of nodes) {
         const cellX = Math.floor(node.x / GRID_CELL_SIZE);
         const cellY = Math.floor(node.y / GRID_CELL_SIZE);
@@ -79,7 +81,6 @@ export function HeroBackground() {
           grid.set(key, [node]);
         }
       }
-      return grid;
     }
 
     function draw() {
@@ -105,7 +106,7 @@ export function HeroBackground() {
         node.y += node.vy;
       }
 
-      const grid = buildGrid();
+      updateGrid();
 
       for (const node of nodes) {
         const cellX = Math.floor(node.x / GRID_CELL_SIZE);

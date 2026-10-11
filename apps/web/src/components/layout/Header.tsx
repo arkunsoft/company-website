@@ -1,9 +1,10 @@
+// apps/web/src/components/home/Header.tsx
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getSocialIcon } from "@/lib/getSocialIcon";
 import type { SITE_SETTINGS_QUERY_RESULT } from "@/lib/sanity/sanity.types";
 
@@ -20,6 +21,7 @@ interface HeaderProps {
 export function Header({ settings }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
   const socialLinks = settings?.socialLinks ?? [];
 
@@ -31,6 +33,27 @@ export function Header({ settings }: HeaderProps) {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: Event) => {
+      if (
+        headerRef.current &&
+        !headerRef.current.contains(event.target as Node)
+      ) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    if (mobileMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("touchstart", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [mobileMenuOpen]);
 
   const isActiveLink = (href: string) => {
     if (href === "/") {
@@ -44,7 +67,10 @@ export function Header({ settings }: HeaderProps) {
   const SVG_HEIGHT = 55;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4 transition-all duration-300 select-none">
+    <header
+      ref={headerRef}
+      className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4 transition-all duration-300 select-none"
+    >
       <nav
         className={`w-full max-w-7xl flex items-center justify-between px-6 py-3 rounded-2xl transition-all duration-300 border relative overflow-visible ${
           scrolled

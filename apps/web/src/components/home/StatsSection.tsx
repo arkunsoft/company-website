@@ -45,6 +45,15 @@ function StatCard({
     });
   }, [springValue, decimals, prefix, suffix]);
 
+  useEffect(() => {
+    const unsubscribe = springValue.on("change", (latest) => {
+      if (ref.current) {
+        ref.current.textContent = `${prefix}${latest.toFixed(decimals)}${suffix}`;
+      }
+    });
+    return () => unsubscribe();
+  }, [springValue, decimals, prefix, suffix]);
+
   return (
     <div
       ref={containerRef}

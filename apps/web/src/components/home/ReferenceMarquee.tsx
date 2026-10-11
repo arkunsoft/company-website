@@ -36,12 +36,37 @@ export function ReferenceMarquee({ clients }: ReferenceMarqueeProps) {
 
       <InView delay={500}>
         <div className="relative w-full overflow-hidden flex items-center">
-          <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-48 bg-linear-to-r from-white to-transparent z-20 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-16 bg-linear-to-r from-white to-transparent z-20 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 bg-linear-to-l from-white to-transparent z-20 pointer-events-none" />
 
-          <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-48 bg-linear-to-l from-white to-transparent z-20 pointer-events-none" />
+          <div className="flex lg:hidden overflow-x-auto snap-x snap-mandatory gap-4 px-6 w-full scrollbar-none [-ms-overflow-style:none] pb-4">
+            {clients.map((client, idx) => (
+              <div
+                key={`mobile-${client._id}-${idx}`}
+                className="group relative cursor-pointer shrink-0 snap-center flex items-center justify-center px-6 py-4 w-44 h-20 rounded-2xl bg-slate-50/90 border border-slate-200/80 shadow-xs active:scale-95 transition-transform"
+              >
+                <div className="relative h-10 w-28 flex items-center justify-center">
+                  {client.logoUrl ? (
+                    <Image
+                      src={client.logoUrl}
+                      alt={client.name || "Referans Logo"}
+                      fill
+                      sizes="112px"
+                      priority={idx < 3}
+                      className="object-contain"
+                    />
+                  ) : (
+                    <span className="text-sm font-bold text-slate-700">
+                      {client.name}
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
 
           <motion.div
-            className="flex flex-nowrap gap-6 w-max py-4"
+            className="hidden lg:flex flex-nowrap gap-6 w-max py-4"
             animate={{ x: ["0%", "-50%"] }}
             transition={{
               repeat: Infinity,
@@ -51,7 +76,7 @@ export function ReferenceMarquee({ clients }: ReferenceMarqueeProps) {
           >
             {duplicatedClients.map((client, idx) => (
               <div
-                key={`${client._id}-${idx}`}
+                key={`desktop-${client._id}-${idx}`}
                 className="group relative cursor-pointer shrink-0 flex items-center justify-center px-6 py-4 w-48 h-20 rounded-2xl bg-slate-50/80 border border-slate-200/80 backdrop-blur-sm transition-all duration-300 hover:bg-white hover:border-[#38A3E5]/50 hover:shadow-xl hover:shadow-[#38A3E5]/10 hover:-translate-y-1"
               >
                 <div className="relative h-10 w-32 flex items-center justify-center filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300">
@@ -61,7 +86,7 @@ export function ReferenceMarquee({ clients }: ReferenceMarqueeProps) {
                       alt={client.name || "Referans Logo"}
                       fill
                       sizes="128px"
-                      className="object-contain"
+                      priority={idx < 3}
                     />
                   ) : (
                     <span className="text-sm font-bold text-slate-700 group-hover:text-[#1B75BC] transition-colors">
