@@ -12,8 +12,8 @@ type Node = {
   vy: number;
 };
 
-const NODE_COUNT = 80;
-const CONNECTION_DISTANCE = 150;
+const NODE_COUNT = 120;
+const CONNECTION_DISTANCE = 200;
 const MOUSE_RADIUS = 160;
 const MOUSE_FORCE = 0.06;
 const RETURN_FORCE = 0.02;
@@ -26,8 +26,8 @@ export function HeroBackground() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const isMobile = window.matchMedia("(max-width: 639px)").matches;
-    if (isMobile) return;
+    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
+    if (!isDesktop) return;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
@@ -168,7 +168,7 @@ export function HeroBackground() {
       <div className="absolute inset-0 bg-linear-to-br from-[#0F3866] via-[#0F3866] to-[#1B75BC]" />
       <canvas
         ref={canvasRef}
-        className="pointer-events-auto absolute inset-0 hidden h-full w-full sm:block"
+        className="pointer-events-auto absolute inset-0 hidden h-full w-full lg:block"
       />
       <div className="absolute inset-0 bg-linear-to-t from-[#0F3866]/60 via-transparent to-[#0F3866]/30" />
     </div>
