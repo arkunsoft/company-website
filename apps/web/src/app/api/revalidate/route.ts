@@ -1,5 +1,5 @@
 // apps/web/src/app/api/revalidate/route.ts
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
 import { parseBody } from "next-sanity/webhook";
 import { sanityRevalidateSecret } from "@/lib/sanity/env";
@@ -13,11 +13,13 @@ interface SanityWebhookBody {
 
 export async function POST(req: NextRequest) {
   try {
+    // Parse and validate the incoming webhook body from Sanity
     const { isValidSignature, body } = await parseBody<SanityWebhookBody>(
       req,
       sanityRevalidateSecret,
     );
 
+    // Return 401 if the signature is invalid
     if (!isValidSignature) {
       return NextResponse.json(
         { message: "Invalid signature" },
@@ -25,6 +27,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Return 400 if the document type is missing
     if (!body?._type) {
       return NextResponse.json(
         { message: "Bad Request: Missing _type" },
@@ -32,17 +35,18 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    revalidateTag(body._type, { expire: 0 });
+    // Revalidate the root layout and global paths
+    revalidatePath("/", "layout");
 
+    // Revalidate specific paths based on the updated document type
     if (body._type === "project") {
-      revalidatePath("/");
       revalidatePath("/projects");
-
       if (body.slug?.current) {
         revalidatePath(`/projects/${body.slug.current}`);
       }
     }
 
+    // Return success response indicating revalidation is complete
     return NextResponse.json({
       status: 200,
       revalidated: true,
@@ -51,6 +55,7 @@ export async function POST(req: NextRequest) {
       now: Date.now(),
     });
   } catch (err) {
+    // Catch and log any unexpected server errors during revalidation
     console.error("Revalidation error:", err);
     return NextResponse.json(
       { message: "Error revalidating", error: (err as Error).message },
