@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
@@ -85,9 +86,18 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const settings = await sanityFetch<SITE_SETTINGS_QUERY_RESULT>({
-    query: SITE_SETTINGS_QUERY,
-  });
+  // Check if the current request is for the studio route
+  const headersList = await headers();
+  const headerPath =
+    headersList.get("x-invoke-path") || headersList.get("referer") || "";
+  const isStudio = headerPath.includes("/studio");
+
+  // Fetch site settings only if it's not a studio route
+  const settings = !isStudio
+    ? await sanityFetch<SITE_SETTINGS_QUERY_RESULT>({
+        query: SITE_SETTINGS_QUERY,
+      })
+    : null;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -117,10 +127,10 @@ export default async function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col">
-        <Header settings={settings} />
+        {!isStudio && settings && <Header settings={settings} />}
         <main className="flex-1">{children}</main>
-        <Footer />
-        <ScrollToTop />
+        {!isStudio && <Footer />}
+        {!isStudio && <ScrollToTop />}
       </body>
     </html>
   );
