@@ -88,9 +88,8 @@ export default async function RootLayout({
 }) {
   // Check if the current request is for the studio route
   const headersList = await headers();
-  const headerPath =
-    headersList.get("x-invoke-path") || headersList.get("referer") || "";
-  const isStudio = headerPath.includes("/studio");
+  const pathname = headersList.get("x-pathname") || "";
+  const isStudio = pathname.startsWith("/studio");
 
   // Fetch site settings only if it's not a studio route
   const settings = !isStudio
